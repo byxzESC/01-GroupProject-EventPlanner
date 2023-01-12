@@ -4,7 +4,13 @@ var searchBtn = document.querySelector("#searchBtn")
 
 
 
-//variable for html elements
+//variable for html elements 
+// use d3 to select elements from html
+// var weatherInfo 
+// var ticketInfo
+
+
+
 
 fetch(tmApiUrl).then(function (response) {
     if (response.ok) {
@@ -24,20 +30,27 @@ fetch(weatherApiUrl).then(function (response) {
 
 
 
-//event listener on search submit of city name
+//event listener on search submit of cityName
     //invoke a function eventSearch
 
-//eventSearch function accepting city name as an argument
-    //fetch ticketmaster using city name
-        //call a function displayEvent
-    // fetch weather using the city name
-        //call a function displayWeather
+//eventSearch function accepting cityName as an argument
+    // fetch ticketmaster using cityName
+        //call a function displayEvent passes data into it
+    // fetch weather using the cityName
+        //call a function displayWeather passes data into it
     
-//create a function called displayEvent
-//create a function called displayWeather
+//function displayEvent accepts data
+// --- display event information --- event name, ticket availability, price range, date, please note
+    // iterate over data --- for events shown on cityName search
+        // creates element for event info
+        // append elements to weatherInfo
 
 
-//once submitted modale brings up local events and dates
+//function displayWeather accepts data
+// --- displays weather --- location, date, temp, condition, condition icon, wind
+
+
+//once submitted modal brings up local events and dates
 //once selected weather is shown for local event
 //function to submit city name and store it into local storage
 //
