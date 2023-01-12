@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <title>Event Planner</title>
 </head>
@@ -16,15 +19,22 @@
         <!-- modale submit -->
     </div>
 <aside id="weatherInfo">
+    <h2 class="event-weather">Weather for event day:</h2>
+    <ul class="weather-log"></ul>
+
     <!-- append weather here -->
 </aside>    
 <section id="ticketInfo">
-    
+    <h2 class="event-name"></h2>
+    <ul class="ticket-log"></ul>
+    <img src="" alt="placeholder" class="ticket-image">
+
 </section>
 <!-- append ticket info here -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js" integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js" integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
