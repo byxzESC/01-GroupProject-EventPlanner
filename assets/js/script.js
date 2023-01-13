@@ -9,6 +9,7 @@ var citySearchForm = d3.select('#city-search-form');
 //eventSearch function accepting cityName as an argument
 var eventSearch = function (longitude, latitude) {
     console.log('event search args are ', longitude, latitude);
+    // startDateTime/endDateTime
     var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latitude='+ latitude + '&longitude=' + longitude + '&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode&timezone=auto'
 
@@ -37,11 +38,16 @@ var eventSearch = function (longitude, latitude) {
 
 
 //function displayEvent accepts data
-// --- display event information --- event name, ticket availability, price range, date, please note
+function displayEvent (data) {
+        // data._embedded.events[i]
+    // --- display event information --- event name, ticket availability, price range,  date,               please note, ticketmaster url, images
+                                        // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
     // iterate over data --- for events shown on cityName search
+
+
         // creates element for event info
         // append elements to weatherInfo
-
+}
 
 //function displayWeather accepts data
 // --- displays weather --- location, date, temp, condition, condition icon, wind
