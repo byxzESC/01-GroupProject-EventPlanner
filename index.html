@@ -14,15 +14,16 @@
 <body>
     <header><h1>Master Planner!!!</h1></header>
     <div id="search">
-        <input  id="city-search-form" type="text" placeholder="enter city name here">
+        <input type="text" placeholder="enter city name here" id="citySearch">
         <!-- modale submit -->
         <!-- Button trigger modal -->
-        <button id='modal-button' type="button" class="px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal">
         search
+
         </button>
 
         <!-- Modal -->
-        <div class="modal fade fixed hidden outline-none overflow-x-hidden overflow-y-auto"
+        <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
             id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog relative w-auto pointer-events-none">
                 <div
@@ -45,23 +46,27 @@
                                 </select>
                             </div>
 
-                            <div class="">
+                            <label for="start">Select month:</label>
+
+                            <input type="month" id="start" name="start"
+                                min="2023-01" value="2023-01">
+                            <!--<div class="">
                                 <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
                                   <input type="text"
                                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Select a date" data-mdb-toggle="datepicker" />
                                   <label for="floatingInput" class="text-gray-700">Select a date</label>
                                 </div>
-                            </div>
+                            </div> -->
                            
                         </div>
                         Modal body text goes here.
                         </div>
 
                         <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                            <button type="button" class="px-2 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                            <button type="button" class="px-2 py-2.5 bg-purple-600 text-white text-xs leading-tight rounded hover:bg-blue-700" data-bs-dismiss="modal">
                             Cancel</button>
-                            <button type="button" class="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                            <button type="button" class="px-2 py-2.5 m-1 bg-blue-600 text-white text-xs leading-tight rounded hover:bg-blue-700">
                             Submit</button>
                         </div>
                 </div>
