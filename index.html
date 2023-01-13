@@ -16,6 +16,22 @@
     <div id="search">
         <!-- input for user -->
         <input type="text" id="city-search-input" placeholder="enter city name here" >
+        <div class="form-group ">
+            <label for="recipient-name" class="col-form-label">Event Type:</label>
+            <select id="inputState" class="form-control mb-4">
+                <option value="select-option">Please Select Option</option>
+                <option value="concerts">Music Concerts</option>
+                <option value="sports">Sports</option>
+                <option value="Venues">Venues</option>
+            </select>
+        </div>
+        <label for="start">Event starts after:</label>
+        <input type="month" id="startDate" name="start"
+            min="2023-01" value="2023-01">
+
+        <label for="start">Event starts before:</label>
+        <input type="month" id="endDate" name="start"
+            min="2023-01" value="2023-01">
         <button type="button" id="search-submit-button">Search</button>
 
         <!-- modale submit -->
@@ -37,24 +53,9 @@
                         </div>
 
                         <div class="modal-body relative p-4">
-                            <div class="form-group ">
+                            
 
-                                <label for="recipient-name" class="col-form-label">Event Type:</label>
-                                <select id="inputState" class="form-control mb-4">
-                                     <option value="select-option">Please Select Option</option>
-                                     <option value="concerts">Music Concerts</option>
-                                     <option value="sports">Sports</option>
-                                     <option value="Venues">Venues</option>
-                                </select>
-                            </div>
-
-                            <label for="start">Event starts after:</label>
-                            <input type="month" id="startDate" name="start"
-                                min="2023-01" value="2023-01">
-
-                            <label for="start">Event starts before:</label>
-                            <input type="month" id="endDate" name="start"
-                                min="2023-01" value="2023-01">
+                           
                             
                         </div>
 
