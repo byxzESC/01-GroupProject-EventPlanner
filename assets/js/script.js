@@ -1,7 +1,7 @@
-// var searchBtn = d3.select('#search-submit-button');
-// var citySearchForm = d3.select('#city-search-input');
-
-
+// var searchBtn = d3.select('#modal-button');
+// var citySearchForm = d3.select('#city-search-form');
+var searchBtn = document.getElementById('search-submit-button');
+var citySearchForm = document.getElementById('city-search-input');
 
 // startDate
 // EndDate
@@ -16,7 +16,7 @@
 var eventSearch = function (longitude, latitude) {
     console.log('event search args are ', longitude, latitude);
     // startDateTime < data < endDateTime 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latitude='+ latitude + '&longitude=' + longitude + '&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latlong='+ latitude +',' + longitude + '&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode&timezone=auto'
 
     // fetch ticketmaster using cityName
@@ -45,10 +45,9 @@ var eventSearch = function (longitude, latitude) {
 
 //function displayEvent accepts data
 function displayEvent (data) {
-
         // data._embedded.events[i] 
-    // --- display event information --- event name, ticket availability, price range,  date when event starts, please note, ticketmaster url, images
-                                        // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\             .images\
+    // --- display event information --- event name, ticket availability, price range,  date,               please note, ticketmaster url, images
+                                        // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
     // iterate over data --- for events shown on cityName search
     // i = 30
 
@@ -63,21 +62,21 @@ function displayEvent (data) {
 //once submitted modal brings up local events and dates
 //once selected weather is shown for local event
 //function to submit city name and store it into local storage
-var searchBtn = document.getElementById('search-submit-button');
-var citySearchInput = document.getElementById('city-search-input');
-var weatherLog = document.getElementsByClassName('weather-log');
-var ticketLog = document.getElementsByClassName('ticket-log');
+
+
+
+
+
 
 
 //event listener on search submit of cityName
 // d3.select('#modal-button').on('click', async function (event) {
 searchBtn.addEventListener('click', async function (event) {
     event.preventDefault();
-
     // value that user enter
     // var city = d3.select('#city-search-form').values;
     // console.log(d3.select('#city-search-form').value())
-    var city = citySearchInput.value;
+    var city = citySearchForm.value;
     console.log(city);
     
 
@@ -104,12 +103,6 @@ searchBtn.addEventListener('click', async function (event) {
         //invoke a function eventSearch
         eventSearch(longitude, latitude);
     }
-
-    citySearchInput.value = "";
+    citySearchForm.value = "";
 })
 
-
-
-// resources
-    // useful for ticketmaster
-        // data structure for event type --- data._embedded.events[i].classifications[0].segment.name
