@@ -68,7 +68,7 @@ d3.select('#modal-button').on('click', async function (event) {
     event.preventDefault();
     // value that user enter
     var city = d3.select('#city-search-form').values;
-    console.log(d3.select('#city-search-form'))
+    console.log(d3.select('#city-search-form').values)
     
 
     // check if city input is empty
@@ -95,5 +95,6 @@ d3.select('#modal-button').on('click', async function (event) {
         eventSearch(longitude, latitude);
     }
     citySearchForm.value = "";
+    console.log(citySearchForm)
 })
 
