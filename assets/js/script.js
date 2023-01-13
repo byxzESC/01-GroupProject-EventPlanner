@@ -27,11 +27,14 @@ var eventSearch = function (longitude, latitude) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                d3.select('.ticket-log')
-                    .select('li')
+                d3.select('#ticketInfo')
+                    .select('div')
                     .data(data._embedded.events)
                     .enter()
-                    .append('li')
+                    .append('div')
+                    .text(dta => dta.name)
+                    .append('text')
+                    .attr('y', '1em')
                     .text(dta => dta.url)
             }) 
         }
