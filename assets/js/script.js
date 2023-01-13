@@ -3,7 +3,8 @@
 // use d3 to select elements from html
 // var weatherInfo 
 // var ticketInfo
-
+var searchBtn = document.getElementById('modal-button');
+var citySearchForm = document.getElementById('city-search-form');
 
 //eventSearch function accepting cityName as an argument
 var eventSearch = function (longitude, latitude) {
@@ -32,6 +33,9 @@ var eventSearch = function (longitude, latitude) {
     })
 }
 
+
+
+
 //function displayEvent accepts data
 // --- display event information --- event name, ticket availability, price range, date, please note
     // iterate over data --- for events shown on cityName search
@@ -48,8 +52,11 @@ var eventSearch = function (longitude, latitude) {
 //function to submit city name and store it into local storage
 
 
-//event listener on search submit of cityName
-    //invoke a function eventSearch
+
+
+
+
+
 //event listener on search submit of cityName
 searchBtn.addEventListener('click', async function (event) {
     event.preventDefault();
