@@ -1,5 +1,11 @@
-var searchBtn = d3.select('#modal-button');
-var citySearchForm = d3.select('#city-search-form');
+// var searchBtn = d3.select('#modal-button');
+// var citySearchForm = d3.select('#city-search-form');
+var searchBtn = document.getElementById('modal-button');
+var citySearchForm = document.getElementById('city-search-form');
+
+// startDate
+// EndDate
+
 //variable for html elements
 // use d3 to select elements from html
 // var weatherInfo 
@@ -9,7 +15,7 @@ var citySearchForm = d3.select('#city-search-form');
 //eventSearch function accepting cityName as an argument
 var eventSearch = function (longitude, latitude) {
     console.log('event search args are ', longitude, latitude);
-    // startDateTime/endDateTime
+    // startDateTime < data < endDateTime 
     var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latitude='+ latitude + '&longitude=' + longitude + '&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode&timezone=auto'
 
@@ -39,11 +45,11 @@ var eventSearch = function (longitude, latitude) {
 
 //function displayEvent accepts data
 function displayEvent (data) {
-        // data._embedded.events[i]
+        // data._embedded.events[i] 
     // --- display event information --- event name, ticket availability, price range,  date,               please note, ticketmaster url, images
                                         // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
     // iterate over data --- for events shown on cityName search
-
+    // i = 30
 
         // creates element for event info
         // append elements to weatherInfo
@@ -64,11 +70,14 @@ function displayEvent (data) {
 
 
 //event listener on search submit of cityName
-d3.select('#modal-button').on('click', async function (event) {
+// d3.select('#modal-button').on('click', async function (event) {
+searchBtn.addEventListener('click', async function (event) {
     event.preventDefault();
     // value that user enter
-    var city = d3.select('#city-search-form').values;
-    console.log(d3.select('#city-search-form').values)
+    // var city = d3.select('#city-search-form').values;
+    // console.log(d3.select('#city-search-form').value())
+    var city = citySearchForm.value;
+    console.log(city);
     
 
     // check if city input is empty
@@ -95,6 +104,5 @@ d3.select('#modal-button').on('click', async function (event) {
         eventSearch(longitude, latitude);
     }
     citySearchForm.value = "";
-    console.log(citySearchForm)
 })
 
