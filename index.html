@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-    
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>Event Planner</title>
+
+  </head>
+
+  <body>
+    <header><h1>Master Planner!!!</h1></header>
+    <div id="search">
+      <!-- input for user -->
+      <input
+        type="text"
+        id="city-search-input"
+        placeholder="enter city name here"
+      />
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Event Type:</label>
+        <select id="inputState" class="form-control mb-4">
+          <option value="select-option">Please Select Option</option>
+          <option value="concerts">Music Concerts</option>
+          <option value="sports">Sports</option>
+          <option value="Venues">Venues</option>
+        </select>
+      </div>
+      <label for="start">Event starts after:</label>
+      <input
+        type="month"
+        id="startDate"
+        name="start"
+        min="2023-01"
+        value="2023-01"
+      />
+
 </head>
 <body>
 <div class="text-center bg-sky-900 text-gray-900 py-10 px-6">
@@ -31,20 +63,32 @@
         <input type="month" id="startDate" name="start"
             min="2023-01" value="2023-01">
 
-        <label for="start">Event starts before:</label>
-        <input type="month" id="endDate" name="start"
-            min="2023-01" value="2023-01">
-        <button type="button" id="search-submit-button">Search</button>
+
+      <label for="start">Event starts before:</label>
+      <input
+        type="month"
+        id="endDate"
+        name="start"
+        min="2023-01"
+        value="2023-01"
+      />
+      <button type="button" id="search-submit-button">Search</button>
+
+
+      <!-- modale submit -->
+      <!-- Button trigger modal -->
+      <!-- <button type="button" id="search-submit-button" class="px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
 
         <!-- modale submit -->
         <!-- Button trigger modal -->
         <!-- <button type="button" id="search-submit-button" class="px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
         search
         </button> -->
 
-        <!-- Modal -->
-        <!-- <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+      <!-- Modal -->
+      <!-- <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
             id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog relative w-auto pointer-events-none">
                 <div
@@ -75,6 +119,19 @@
         </div> -->
     </div>
 
+
+    <aside id="weatherInfo">
+      <h2 class="event-weather">Weather for event day:</h2>
+      <ul class="weather-log"></ul>
+
+      <!-- append weather here -->
+    </aside>
+    <section id="ticketInfo">
+      <h2 class="event-name"></h2>
+      <ul class="ticket-log"></ul>
+      <img src="" alt="placeholder" class="ticket-image" />
+    </section>
+
     <br>
 
     <div class=" bg-emerald-600 text-gray-900 py-10 px-6">
@@ -92,11 +149,22 @@
 
 </section>
 
-<!-- append ticket info here -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js" integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js" integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- append ticket info here -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
+      integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js"
+      integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="assets/js/script.js"></script>
-</body>
+  </body>
 </html>

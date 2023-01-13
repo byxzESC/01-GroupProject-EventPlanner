@@ -27,6 +27,12 @@ var eventSearch = function (longitude, latitude) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
+                d3.select('.ticket-log')
+                    .select('li')
+                    .data(data._embedded.events)
+                    .enter()
+                    .append('li')
+                    .text(dta => dta.url)
             }) 
         }
     })
