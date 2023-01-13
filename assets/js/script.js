@@ -1,32 +1,9 @@
-var tmApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?city='+ {city} +'&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
-var weatherApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=51.51&longitude=-0.13&hourly=temperature_2m'
+
 //variable for html elements
 // use d3 to select elements from html
 // var weatherInfo 
 // var ticketInfo
 
-
-
-fetch(tmApiUrl).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (data) {
-            console.log(data);
-        }) 
-    }
-})
-
-fetch(weatherApiUrl).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (data) {
-            console.log(data);
-        }) 
-    }
-})
-
-
-
-//event listener on search submit of cityName
-    //invoke a function eventSearch
 
 //eventSearch function accepting cityName as an argument
 var eventSearch = function (longitude, latitude) {
@@ -71,7 +48,8 @@ var eventSearch = function (longitude, latitude) {
 //function to submit city name and store it into local storage
 
 
-
+//event listener on search submit of cityName
+    //invoke a function eventSearch
 //event listener on search submit of cityName
 searchBtn.addEventListener('click', async function (event) {
     event.preventDefault();
