@@ -28,14 +28,17 @@ var eventSearch = function (longitude, latitude) {
             response.json().then(function (data) {
                 console.log(data);
                 d3.select('#ticketInfo')
-                    .select('div')
+                    .selectAll('div')
                     .data(data._embedded.events)
                     .enter()
                     .append('div')
+                    .classed('eCards', true)
+                    .append('h2')
                     .text(dta => dta.name)
-                    .append('text')
-                    .attr('y', '1em')
-                    .text(dta => dta.url)
+                    // .append('text')
+                    // .attr('y', '1.5em')
+                    // .style('margin', '2px')
+                    // .text(dta => dta.url)
             }) 
         }
     })
@@ -94,7 +97,7 @@ searchBtn.addEventListener('click', async function (event) {
         alert("please enter a city name");
     } else {
         // get the longitude and latitude of the input city
-        var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&key=5ffc6c893abd4262b33abf21d8deab53';
+        var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
         
         // waits for response from open cage api
         try{
