@@ -32,9 +32,21 @@ var eventSearch = function (longitude, latitude) {
                     .data(data._embedded.events)
                     .enter()
                     .append('div')
-                    .classed('eCards', true)
+                    .classed('eCards, font-bold', true)
                     .append('h2')
                     .text(dta => dta.name)
+                    .append('h3')
+                    .text(dta => dta.dates.start.localDate)
+                    .append(`p`)
+                    .text("Min: ")
+                    // .text( dta.text("Min: ") => dta.priceRanges[0].min)
+                    .text(function(dta){
+                         return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
+                    })
+                    // .append("a")
+                    .attr("xlink:href", function(d) {return "dta => dta.url"})
+                    
+            
                     // .append('text')
                     // .attr('y', '1.5em')
                     // .style('margin', '2px')
