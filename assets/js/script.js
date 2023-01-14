@@ -90,7 +90,8 @@ var displayWeather = function (data) {
 
 //event listener on search submit of cityName
 // d3.select('#modal-button').on('click', async function (event) {
-searchBtn.addEventListener('click', async function (event) {
+    d3.select('#search-submit-button')
+    .on('click', async function (event) {
     event.preventDefault();
     // value that user enter
     // var city = d3.select('#city-search-form').values;
