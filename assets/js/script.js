@@ -67,8 +67,8 @@ function displayEvent (data) {
             `<div class="card-body">
                 <h5 class="card-title">${d.name}</h5>
                 <p class="event-date">${d.dates.start.localDate}</p>
-                <button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700" href="${d.url}">More Info</button>
-        `)
+                <a href="${d.url}"><button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700">More Info</button></a> 
+                `)
     .selectChild().insert('p')
     .text(function(dta) {
          if(dta.priceRanges){
