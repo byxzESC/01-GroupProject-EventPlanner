@@ -1,84 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>Event Planner</title>
 
-  </head>
+</head>
 
 <body>
-<div class="text-center bg-sky-900 text-gray-900 py-10 px-6">
-    <header><h1 class="text-5xl font-bold mt-0 mb-6">Master Planner!!!</h1></header>
-</div>
-    <div class="text-center bg-cyan-600 text-grey py-10 px-6" id="search">
-        <!-- input for user -->
-        <input type="text" id="city-search-input" placeholder="enter city name here" >
-        <div class="form-group ">
-            <label for="recipient-name" class="col-form-label">Event Type:</label>
-            <select id="inputState" class="form-control mb-4">
-                <option value="select-option">Please Select Option</option>
-                <option value="concerts">Music Concerts</option>
-                <option value="sports">Sports</option>
-                <option value="Venues">Venues</option>
-            </select>
+
+    <div class="text-left bg-zinc-800 text-teal-500 py-4 pl-12 ml-12">
+        <header>
+            <h1 class="text-3xl font-bold mt-0 mb-6">Master Planner</h1>
+        </header>
+    </div>
+    <main class="container bg-zinc-800 text-teal-500 py-4 px-2">
+        <div id="search" class="py-4 px-2" >
+            <!-- input for user -->
+            <input type="text" id="city-search-input" class="my-4 mx-2 "placeholder="enter city name here">
+            <div class="form-group my-4 mx-2 ">
+                <label for="event-name" class="col-form-label">Event Type:</label>
+                <select id="inputState" class="form-control mb-4">
+                    <option value="select-option">Please Select Option</option>
+                    <option value="concerts">Music Concerts</option>
+                    <option value="sports">Sports</option>
+                    <option value="Venues">Venues</option>
+                </select>
+            </div>
+            <label for="start">Event starts after:</label>
+            <input id="startDate" type="month"  name="start" min="2023-01" value="2023-01">
+
+
+            <label for="start">Event starts before:</label>
+            <input id="endDate" type="month"  name="start" min="2023-01" value="2023-01" />
+            <br>
+            <button id="search-submit-button" type="button" class="bg-teal-500 hover:bg-teal-400 text-white font-bold py-2 px-4 border-b-4 border-teal-700 hover:border-teal-500 rounded">
+                Search</button>
+
         </div>
-        <label for="start">Event starts after:</label>
-        <input type="month" id="startDate" name="start"
-            min="2023-01" value="2023-01">
 
+        <div class="bg-zinc-800 text-teal-500 py-10 px-6">
+            <aside id="weatherInfo">
+                <h2 class="event-weather">Weather for event day:</h2>
+                <ul class="weather-log"></ul>
+                <!-- append weather here -->
 
-      <label for="start">Event starts before:</label>
-      <input
-        type="month"
-        id="endDate"
-        name="start"
-        min="2023-01"
-        value="2023-01"
-      />
-      <button type="button" id="search-submit-button">Search</button>
+            </aside>
+            <section id="ticketInfo" class="py-4 px-2">
+                <h2 class="event-name"></h2>
+                <ul class="ticket-log"></ul>
+        </div>
 
-    </div>
-
-    <div class=" bg-emerald-600 text-gray-900 py-10 px-6">
-        <aside id="weatherInfo">
-        <h2 class="event-weather">Weather for event day:</h2>
-        <ul class="weather-log"></ul>
-
-        <!-- append weather here -->
-        </aside>    
-        <section id="ticketInfo">
-        <h2 class="event-name"></h2>
-        <section class="ticket-log"></section>
-     <img src="" alt="placeholder" class="ticket-image">
-    </div>
-
-</section>
+        </section>
+    </main>
 
 
     <!-- append ticket info here -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
-      integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js"
-      integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
+        integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js"
+        integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/script.js"></script>
-  </body>
+</body>
+
 </html>

@@ -27,18 +27,12 @@ var eventSearch = function (longitude, latitude) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                d3.select('#ticketInfo')
-                    .selectAll('div')
+                d3.select('.ticket-log')
+                    .select('li')
                     .data(data._embedded.events)
                     .enter()
-                    .append('div')
-                    .classed('eCards', true)
-                    .append('h2')
-                    .text(dta => dta.name)
-                    // .append('text')
-                    // .attr('y', '1.5em')
-                    // .style('margin', '2px')
-                    // .text(dta => dta.url)
+                    .append('li')
+                    .text(dta => dta.url)
             }) 
         }
     })
@@ -57,6 +51,7 @@ var eventSearch = function (longitude, latitude) {
 
 //function displayEvent accepts data
 function displayEvent (data) {
+    var eventInfo = data._embedded.events
         // data._embedded.events[i] 
     // --- display event information --- event name, ticket availability, price range,  date,               please note, ticketmaster url, images
                                         // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
@@ -97,7 +92,7 @@ searchBtn.addEventListener('click', async function (event) {
         alert("please enter a city name");
     } else {
         // get the longitude and latitude of the input city
-        var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
+        var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&key=5ffc6c893abd4262b33abf21d8deab53';
         
         // waits for response from open cage api
         try{
@@ -117,4 +112,89 @@ searchBtn.addEventListener('click', async function (event) {
     }
     citySearchForm.value = "";
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

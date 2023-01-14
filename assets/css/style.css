@@ -1,6 +1,28 @@
+:root {
+    --primary-color: #54BAB9;
+    --secondary-color: #18978F;
+    --accent-color: #E9DAC1;
+    --special-color: #F7ECDE;
+    --special-color-2: #FF4331;
+    --dark: #242B2E;
+    --white: #CAD5E2;
 
-br {
-    display: block; /* makes it have a width */
-    content: ""; /* clears default height */
-    margin-top: 250px; /* change height */
+    --tailwind-bg: #27272a;
+    --tailwind-text: #14b8a6;
 }
+
+body {
+    background-color: var(--tailwind-bg);
+    color: var(--tailwind-text);
+}
+
+/* br {
+    display: block;
+    content: "";
+    margin-top: 250px; 
+}
+ */
+
+ li {
+    color: var(--tailwind-text)
+ }
