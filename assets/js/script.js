@@ -73,9 +73,6 @@ var eventSearch = function (longitude, latitude) {
     })
 }
 
-
-
-
 //function displayEvent accepts data
 function displayEvent (data) {
         // data._embedded.events[i] 
@@ -83,33 +80,30 @@ function displayEvent (data) {
                                         // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
     // iterate over data --- for events shown on cityName search
     // i = 30
-    if (data.priceRanges) {
-        var minPrice = 0;
-        var maxPrice = 0;
+    if (data.priceRanges === undefined) {
+        var price = "N/A";
     } else {
-        var minPrice = data.priceRanges[0].min;
-        var maxPrice = data.priceRanges[0].max;
+        var price = "$" + data.priceRanges[0].min + " to $" + data.priceRanges[0].max;
     }
-        // creates element for event info
-        // append elements to weatherInfo
 
-        // for line 102 errors
-        // <p class="price-ranges">Price range ${d.priceRanges[0].min} to ${d.priceRanges[0].max}</p>
+
+    // creates element for event info
     d3.select('#ticketInfo')
     .selectAll('div')
     .data(data)
     .enter()
     .append('div')
-    .classed('card, font-bold', true)
+    .classed('card, my-2, font-bold', true)
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
                 <h5 class="card-title">${d.name}</h5>
                 <p class="event-date">${d.dates.start.localDate}</p>
-                <p class="price-ranges">Price range $${minPrice} to $${maxPrice}</p>
+                <p class="price-ranges">Price range ${price}</p>
                 <a href="${d.url}">More Info</a>
         `)
     });
+    // append elements to weatherInfo
 
 }
 
@@ -120,10 +114,6 @@ function displayEvent (data) {
 //once submitted modal brings up local events and dates
 //once selected weather is shown for local event
 //function to submit city name and store it into local storage
-
-
-
-
 
 
 
