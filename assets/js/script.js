@@ -94,7 +94,7 @@ searchBtn.addEventListener('click', async function (event) {
 
     // check if city input is empty
     if (!city) {
-        alert("please enter a city name");
+        console.log("need city name")
     } else {
         // get the longitude and latitude of the input city
         var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
