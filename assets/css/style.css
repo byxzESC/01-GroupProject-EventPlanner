@@ -1,7 +1,26 @@
+:root {
+    --primary-color: #54BAB9;
+    --secondary-color: #18978F;
+    --accent-color: #E9DAC1;
+    --special-color: #F7ECDE;
+    --special-color-2: #FF4331;
+    --dark: #242B2E;
+    --white: #CAD5E2;
 
-br {
-    display: block; /* makes it have a width */
-    content: ""; /* clears default height */
-    margin-top: 250px; /* change height */
+    --tailwind-bg: #e5e5e5;
+    --tailwind-text: #111827;
 }
 
+body {
+    height: 100vh;
+    background-color: var(--tailwind-bg);
+    color: var(--tailwind-text);
+}
+
+ li {
+    color: var(--tailwind-text);
+ }
+
+#weatherInfo div {
+    padding: 1.5rem 1rem;
+}
