@@ -38,12 +38,17 @@ var eventSearch = function (longitude, latitude) {
                     .append('h3')
                     .text(dta => dta.dates.start.localDate)
                     .append(`p`)
-                    .text("Min: ")
+                    //  .text("Min: ")
                     // .text( dta.text("Min: ") => dta.priceRanges[0].min)
                     .text(function(dta){
+                         if(dta.priceRanges){
                          return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
+                    } else {
+                      return "N/A"}
                     })
-                    // .append("a")
+                    .append('p')
+                    .text('Click Me')
+                    .append("a")
                     .attr("xlink:href", function(d) {return "dta => dta.url"})
                     
             
