@@ -24,3 +24,10 @@ body {
 #weatherInfo div {
     padding: 1.5rem 1rem;
 }
+
+#ticketInfo .card {
+    border: 1px solid;
+    display: inline-block;
+    margin: 5px;
+    padding: 2px;
+}

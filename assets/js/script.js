@@ -27,29 +27,33 @@ var eventSearch = function (longitude, latitude) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                d3.select('#ticketInfo')
-                    .selectAll('div')
-                    .data(data._embedded.events)
-                    .enter()
-                    .append('div')
-                    .classed('eCards, font-bold', true)
-                    .append('h2')
-                    .text(dta => dta.name)
-                    .append('h3')
-                    .text(dta => dta.dates.start.localDate)
-                    .append(`p`)
+                displayEvent(data._embedded.events);
+                // d3.select('#ticketInfo')
+                //     .selectAll('div')
+                //     .data(data._embedded.events)
+                //     .enter()
+                //     .append('div')
+                //     .classed('eCards, font-bold', true)
+                //     .append('h2')
+                //     .text(dta => dta.name)
+                //     .append('h3')
+                //     .text(dta => dta.dates.start.localDate)
+                //     .append(`p`)
+
                     //  .text("Min: ")
                     // .text( dta.text("Min: ") => dta.priceRanges[0].min)
-                    .text(function(dta){
-                         if(dta.priceRanges){
-                         return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
-                    } else {
-                      return "N/A"}
-                    })
-                    .append('p')
-                    // .html sets the text and the link in the same element.
-                    .html(function(d) {return '<a href=' + d.url + '>' + 'Click Me' + '</a>'})
-                
+
+                    // .text(function(dta){
+                    //      if(dta.priceRanges){
+                    //      return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
+                    // } else {
+                    //   return "N/A"}
+                    // })
+
+                    // .append('p')
+                    // .text('Click Me')
+                    // .append("a")
+                    // .attr("xlink:href", function(d) {return "dta => dta.url"})
                     
             
                     // .append('text')
@@ -79,9 +83,34 @@ function displayEvent (data) {
                                         // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
     // iterate over data --- for events shown on cityName search
     // i = 30
-
+    if (data.priceRanges) {
+        var minPrice = 0;
+        var maxPrice = 0;
+    } else {
+        var minPrice = data.priceRanges[0].min;
+        var maxPrice = data.priceRanges[0].max;
+    }
         // creates element for event info
         // append elements to weatherInfo
+
+        // for line 102 errors
+        // <p class="price-ranges">Price range ${d.priceRanges[0].min} to ${d.priceRanges[0].max}</p>
+    d3.select('#ticketInfo')
+    .selectAll('div')
+    .data(data)
+    .enter()
+    .append('div')
+    .classed('card, font-bold', true)
+    .each(function(d) {
+        d3.select(this).html(
+            `<div class="card-body">
+                <h5 class="card-title">${d.name}</h5>
+                <p class="event-date">${d.dates.start.localDate}</p>
+                <p class="price-ranges">Price range $${minPrice} to $${maxPrice}</p>
+                <a href="${d.url}">More Info</a>
+        `)
+    });
+
 }
 
 //function displayWeather accepts data
@@ -111,11 +140,12 @@ searchBtn.addEventListener('click', async function (event) {
 
     // check if city input is empty
     if (!city) {
+
         console.log("need city name")
     } else {
         // get the longitude and latitude of the input city
         var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
-        
+
         // waits for response from open cage api
         try{
             let response = await fetch(openCageApiUrl);
@@ -134,4 +164,11 @@ searchBtn.addEventListener('click', async function (event) {
     }
     citySearchForm.value = "";
 })
+
+
+// enter a city --- user input
+    // fetch event data
+        // get the date for the event
+            // function fetchWeather
+                    // display weather
 
