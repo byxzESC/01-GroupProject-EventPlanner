@@ -31,8 +31,14 @@ var eventSearch = function (longitude, latitude) {
                     .select('li')
                     .data(data._embedded.events)
                     .enter()
-                    .append('li')
-                    .text(dta => dta.url)
+                    .append('div')
+                    .classed('eCards', true)
+                    .append('h2')
+                    .text(dta => dta.name)
+                    // .append('text')
+                    // .attr('y', '1.5em')
+                    // .style('margin', '2px')
+                    // .text(dta => dta.url)
             }) 
         }
     })
@@ -89,7 +95,7 @@ searchBtn.addEventListener('click', async function (event) {
 
     // check if city input is empty
     if (!city) {
-        alert("please enter a city name");
+        console.log("need city name")
     } else {
         // get the longitude and latitude of the input city
         var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&key=5ffc6c893abd4262b33abf21d8deab53';

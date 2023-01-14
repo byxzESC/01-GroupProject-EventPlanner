@@ -16,13 +16,9 @@ body {
     color: var(--tailwind-text);
 }
 
-/* br {
-    display: block;
-    content: "";
-    margin-top: 250px; 
+br {
+    display: block; /* makes it have a width */
+    content: ""; /* clears default height */
+    margin-top: 250px; /* change height */
 }
- */
 
- li {
-    color: var(--tailwind-text)
- }
