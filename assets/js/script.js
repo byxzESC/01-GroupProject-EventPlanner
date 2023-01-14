@@ -50,6 +50,8 @@ var eventSearch = function (longitude, latitude) {
         }
     })
 }
+// super cool text
+// font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
 
 //function displayEvent accepts data
 function displayEvent (data) {
@@ -66,7 +68,7 @@ function displayEvent (data) {
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
-                <h5 class="card-title">${d.name}</h5>
+                <h5 class="card-title text-white h-16">${d.name}</h5>
                 <p class="event-date">${d.dates.start.localDate}</p>
                 <a href="${d.url}"><button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700">More Info</button></a> 
                 `)
