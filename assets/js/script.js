@@ -96,6 +96,9 @@ var displayWeather = function (data) {
     d3.select('#search-submit-button')
     .on('click', async function (event) {
     event.preventDefault();
+         d3.selectAll('#eCard')
+            .remove()
+
     // value that user enter
     // var city = d3.select('#city-search-form').values;
     // console.log(d3.select('#city-search-form').value())
