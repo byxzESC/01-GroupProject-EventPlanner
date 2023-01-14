@@ -9,26 +9,37 @@
 
     --tailwind-bg: #e5e5e5;
     --tailwind-text: #111827;
+    --tailwind-cardBg: #0d9488;
 }
 
 
 body {
+
     height: 100vh;
     background-color: var(--tailwind-bg);
     color: var(--tailwind-text);
 }
 
+#search-result {
+    margin: 24px 16px;
+}
 
 #weatherInfo div {
     padding: 1.5rem 1rem;
 }
 
+#ticketInfo {
+
+}
+
 #eCard {
-    display: flex;
-    background-color: teal;
-    color: white;
-    border: 1px solid;
     display: inline-block;
+    background-color: var(--tailwind-cardBg);
+    color: white;
+    border: var(--dark) 2px solid;
+    border-radius: 8px;
+    width: 300px;
+    height: 160px;
     margin: 5px;
-    padding: 2px;
+    padding: 8px;
 }
