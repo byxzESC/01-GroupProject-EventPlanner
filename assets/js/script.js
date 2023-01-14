@@ -11,6 +11,16 @@ var citySearchForm = document.getElementById('city-search-input');
 // var weatherInfo 
 // var ticketInfo
 
+//once submitted modal brings up local events and dates
+//once selected weather is shown for local event
+//function to submit city name and store it into local storage
+// enter a city --- user input
+    // fetch event data
+        // get the date for the event
+            // function fetchWeather
+                    // display weather
+
+
 
 //eventSearch function accepting cityName as an argument
 var eventSearch = function (longitude, latitude) {
@@ -28,38 +38,6 @@ var eventSearch = function (longitude, latitude) {
             response.json().then(function (data) {
                 console.log(data);
                 displayEvent(data._embedded.events);
-                // d3.select('#ticketInfo')
-                //     .selectAll('div')
-                //     .data(data._embedded.events)
-                //     .enter()
-                //     .append('div')
-                //     .classed('eCards, font-bold', true)
-                //     .append('h2')
-                //     .text(dta => dta.name)
-                //     .append('h3')
-                //     .text(dta => dta.dates.start.localDate)
-                //     .append(`p`)
-
-                    //  .text("Min: ")
-                    // .text( dta.text("Min: ") => dta.priceRanges[0].min)
-
-                    // .text(function(dta){
-                    //      if(dta.priceRanges){
-                    //      return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
-                    // } else {
-                    //   return "N/A"}
-                    // })
-
-                    // .append('p')
-                    // .text('Click Me')
-                    // .append("a")
-                    // .attr("xlink:href", function(d) {return "dta => dta.url"})
-                    
-            
-                    // .append('text')
-                    // .attr('y', '1.5em')
-                    // .style('margin', '2px')
-                    // .text(dta => dta.url)
             }) 
         }
     })
@@ -75,16 +53,6 @@ var eventSearch = function (longitude, latitude) {
 
 //function displayEvent accepts data
 function displayEvent (data) {
-        // data._embedded.events[i] 
-    // --- display event information --- event name, ticket availability, price range,  date,               please note, ticketmaster url, images
-                                        // .name\        not sure\         .priceRanges\ .dates.start.dateTime\ .pleaseNote\   .url\      .images\
-    // iterate over data --- for events shown on cityName search
-    // i = 30
-    if (data.priceRanges === undefined) {
-        var price = "N/A";
-    } else {
-        var price = "$" + data.priceRanges[0].min + " to $" + data.priceRanges[0].max;
-    }
 
 
     // creates element for event info
@@ -93,28 +61,31 @@ function displayEvent (data) {
     .data(data)
     .enter()
     .append('div')
-    .classed('card, my-2, font-bold', true)
+    .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
                 <h5 class="card-title">${d.name}</h5>
                 <p class="event-date">${d.dates.start.localDate}</p>
-                <p class="price-ranges">Price range ${price}</p>
-                <a href="${d.url}">More Info</a>
+                <button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700" href="${d.url}">More Info</button>
         `)
+    .selectChild().insert('p')
+    .text(function(dta) {
+         if(dta.priceRanges){
+         return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
+    } else {
+      return "N/A"}
+    })
     });
     // append elements to weatherInfo
 
 }
 
 //function displayWeather accepts data
+var displayWeather = function (data) {
 // --- displays weather --- location, date, temp, condition, condition icon, wind
 
-
-//once submitted modal brings up local events and dates
-//once selected weather is shown for local event
-//function to submit city name and store it into local storage
-
+}
 
 
 //event listener on search submit of cityName
@@ -154,11 +125,3 @@ searchBtn.addEventListener('click', async function (event) {
     }
     citySearchForm.value = "";
 })
-
-
-// enter a city --- user input
-    // fetch event data
-        // get the date for the event
-            // function fetchWeather
-                    // display weather
-
