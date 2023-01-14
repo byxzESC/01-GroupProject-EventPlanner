@@ -11,6 +11,7 @@
     --tailwind-text: #111827;
 }
 
+
 body {
     height: 100vh;
     background-color: var(--tailwind-bg);
@@ -22,7 +23,10 @@ body {
     padding: 1.5rem 1rem;
 }
 
-.card {
+#eCard {
+    display: flex;
+    background-color: teal;
+    color: white;
     border: 1px solid;
     display: inline-block;
     margin: 5px;

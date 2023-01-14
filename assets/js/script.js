@@ -61,6 +61,7 @@ function displayEvent (data) {
     .data(data)
     .enter()
     .append('div')
+    .attr('id', 'eCard')
     .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
     .each(function(d) {
         d3.select(this).html(
