@@ -47,9 +47,9 @@ var eventSearch = function (longitude, latitude) {
                       return "N/A"}
                     })
                     .append('p')
-                    .text('Click Me')
-                    .append("a")
-                    .attr("xlink:href", function(d) {return "dta => dta.url"})
+                    // .html sets the text and the link in the same element.
+                    .html(function(d) {return '<a href=' + d.url + '>' + 'Click Me' + '</a>'})
+                
                     
             
                     // .append('text')
