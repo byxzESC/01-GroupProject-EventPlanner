@@ -4,8 +4,10 @@ var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
 var genre;
-
-                   
+var startDate = document.getElementById('startDate').value;
+var endDate = document.getElementById('endDate').value;
+startDate = startDate+"-01";
+endDate = endDate+"-31";
                     
 
 // startDate
@@ -38,6 +40,7 @@ var eventSearch = function (longitude, latitude) {
         //call a function displayEvent passes data into it
     // fetch weather using the cityName
         //call a function displayWeather passes data into it
+
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
