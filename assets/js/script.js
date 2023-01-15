@@ -2,6 +2,10 @@
 // var citySearchForm = d3.select('#city-search-form');
 var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
+var inputVal = d3.select('#inputState');
+var genre;
+                   
+                    
 
 // startDate
 // EndDate
@@ -26,7 +30,7 @@ var citySearchForm = document.getElementById('city-search-input');
 var eventSearch = function (longitude, latitude) {
     console.log('event search args are ', longitude, latitude);
     // startDateTime < data < endDateTime 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latlong='+ latitude +',' + longitude + '&countryCode=US&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latlong='+ latitude +',' + longitude + '&countryCode=US&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode&timezone=auto'
 
     // fetch ticketmaster using cityName
@@ -37,7 +41,7 @@ var eventSearch = function (longitude, latitude) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                displayEvent(data._embedded.events);
+                displayEvent(data._embedded.events)
             }) 
         }
     })
@@ -98,6 +102,7 @@ var displayWeather = function (data) {
     event.preventDefault();
          d3.selectAll('#eCard')
             .remove()
+           genre = inputVal.nodes()[0].value
 
     // value that user enter
     // var city = d3.select('#city-search-form').values;
