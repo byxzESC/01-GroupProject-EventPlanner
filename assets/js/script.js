@@ -3,11 +3,12 @@
 var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
-
+var ticketInfo = d3.select('#ticketInfo')
 var startDate = document.getElementById('startDate').value;
 var endDate = document.getElementById('endDate').value;
 startDate = startDate+"-01";
 endDate = endDate+"-31";
+var date;
                     
 // user enter city name, date range, and pick genre
     // fetch using user input, and area radius
@@ -21,46 +22,26 @@ endDate = endDate+"-31";
 var eventSearch = function (city, genre, dateRange) {
 
     var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
-    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt=2023-03-03'
+   
 
     // fetch ticketmaster using cityName
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-                displayEvent(data._embedded.events)
+                displayEvent(data._embedded.events, city)
             }) 
         }
     })
     // fetch weather using the cityName
-    fetch(weatherApiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-                avTemp = data.forecast.forecastday[0].day.avgtemp_f;
-                displayWeather(avTemp);
-        //     var avTemp = data.forecast.forecastday[0].day.avgtemp_f
-        //     console.log("temp: ", avTemp)
-        //     var locName = data.location.name
-        //     console.log("name: ", locName)
-        //     var dateW = data.forecast.forecastday[0].date
-        //     console.log("date: ", dateW)
-        //     var condition = data.forecast.forecastday[0].hour[3].condition.text
-        //     console.log("conditon: ", condition)
-        //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
-        //     console.log("icon: ", conditionIcon)
-        //     var wind = data.forecast.forecastday[0].day.maxwind_mph
-        //     console.log("wind: ", wind)
-            }) 
-        }
-    })
+   
 
 }
 // super cool text
 // font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
 
 //function displayEvent accepts data
-function displayEvent (data) {
+function displayEvent (data, city) {
 
     // creates element for event info
     d3.select('#ticketInfo')
@@ -69,13 +50,17 @@ function displayEvent (data) {
     .enter()
     .append('div')
     .attr('id', 'eCard')
+
     .attr('tabindex', '1')
+
+    
+
     .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
                 <h5 class="card-title text-white h-16">${d.name}</h5>
-                <p class="event-date">${d.dates.start.localDate}</p>
+                <p class="event-date" value='${d.dates.start.localDate}'>${d.dates.start.localDate}</p>
                 <a href="${d.url}"><button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700">More Info</button></a> 
                 `)
     .selectChild().insert('p')
@@ -85,16 +70,49 @@ function displayEvent (data) {
     } else {
       return "N/A"}
     })
-    console.log(d.dates.start.localDate);
-    });
+
     // append elements to weatherInfo
+    d3.select('#ticketInfo').selectAll('#eCard').on('click', function(){
+        date = this.querySelector('.event-date').getAttribute('value')
+        console.log(date)
+        displayWeather(date, city)
+     })
 
 }
 
+
+// ticketInfo.nodes()[0].on('click', function(){
+//    console.log("I've been clicked");
+// });
+
 //function displayWeather accepts data
 // --- displays weather --- location, date, temp, condition, condition icon, wind
-function displayWeather (avTemp) {
-        console.log('avTemp is', avTemp);
+function displayWeather (date, city) {
+        console.log('date is', date);
+
+        var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+date
+
+        fetch(weatherApiUrl).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    avTemp = data.forecast.forecastday[0].day;
+                    // displayWeather(avTemp);
+            //     var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+            //     console.log("temp: ", avTemp)
+            //     var locName = data.location.name
+            //     console.log("name: ", locName)
+            //     var dateW = data.forecast.forecastday[0].date
+            //     console.log("date: ", dateW)
+            //     var condition = data.forecast.forecastday[0].hour[3].condition.text
+            //     console.log("conditon: ", condition)
+            //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
+            //     console.log("icon: ", conditionIcon)
+            //     var wind = data.forecast.forecastday[0].day.maxwind_mph
+            //     console.log("wind: ", wind)
+                }) 
+            }
+        })
     
     //   var localDate = data._embedded.events[0].dates.start.localDate
     // console.log(data)
@@ -135,7 +153,8 @@ d3.select('#search-submit-button').on('click', function (event) {
     citySearchForm.value = "";
 })
 
-
+d3.select('#eCards')
+    
 
 // submit-button codes
     // inside else statement
