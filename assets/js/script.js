@@ -50,7 +50,11 @@ function displayEvent (data, city) {
     .enter()
     .append('div')
     .attr('id', 'eCard')
-    .attr('onclick',"this.style.width = '1000px'")
+
+    .attr('tabindex', '1')
+
+    
+
     .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
     .each(function(d) {
         d3.select(this).html(
@@ -66,10 +70,7 @@ function displayEvent (data, city) {
     } else {
       return "N/A"}
     })
- 
-    })
-    console.log(d3.selectAll('#eCard'))
-   
+
     // append elements to weatherInfo
     d3.select('#ticketInfo').selectAll('#eCard').on('click', function(){
         date = this.querySelector('.event-date').getAttribute('value')
@@ -127,7 +128,7 @@ function displayWeather (date, city) {
     //     var wind = data.forecast.forecastday[0].day.maxwind_mph
     //     console.log("wind: ", wind)
 
-    
+
 }
 
 //event listener on search submit of cityName
