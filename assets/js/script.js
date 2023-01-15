@@ -69,6 +69,7 @@ function displayEvent (data) {
     .enter()
     .append('div')
     .attr('id', 'eCard')
+    .attr('tabindex', '1')
     .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
     .each(function(d) {
         d3.select(this).html(
@@ -84,6 +85,7 @@ function displayEvent (data) {
     } else {
       return "N/A"}
     })
+    console.log(d.dates.start.localDate);
     });
     // append elements to weatherInfo
 
@@ -108,7 +110,7 @@ function displayWeather (avTemp) {
     //     var wind = data.forecast.forecastday[0].day.maxwind_mph
     //     console.log("wind: ", wind)
 
-    
+
 }
 
 //event listener on search submit of cityName
