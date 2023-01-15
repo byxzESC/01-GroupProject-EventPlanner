@@ -4,6 +4,7 @@ var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
 var genre;
+
                    
                     
 
@@ -30,8 +31,8 @@ var genre;
 var eventSearch = function (longitude, latitude) {
     console.log('event search args are ', longitude, latitude);
     // startDateTime < data < endDateTime 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?latlong='+ latitude +',' + longitude + '&countryCode=US&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
-    var openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode&timezone=auto'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=US&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+   
 
     // fetch ticketmaster using cityName
         //call a function displayEvent passes data into it
@@ -46,13 +47,6 @@ var eventSearch = function (longitude, latitude) {
         }
     })
     
-    fetch(openMeteoApiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-            }) 
-        }
-    })
 }
 // super cool text
 // font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
@@ -89,11 +83,25 @@ function displayEvent (data) {
 }
 
 //function displayWeather accepts data
-var displayWeather = function (data) {
-// --- displays weather --- location, date, temp, condition, condition icon, wind
+function displayWeather (avTemp) {
+        console.log(avTemp);
+    //   var localDate = data._embedded.events[0].dates.start.localDate
+    // console.log(data)
+    // var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+inputVal+'&dt='+localDate+''
+   
+    // fetch(weatherApiUrl).then(function (response) {
+    //     if (response.ok) {
+    //         response.json().then(function (data) {
+    //             console.log(data);
+    //         }) 
+    //     }
+    // })
 
+// --- displays weather --- location, date, temp, condition, condition icon, wind
 }
 
+// d3.select('#eCard')
+//     .on('click')
 
 //event listener on search submit of cityName
 // d3.select('#modal-button').on('click', async function (event) {
@@ -109,31 +117,34 @@ var displayWeather = function (data) {
     // console.log(d3.select('#city-search-form').value())
     var city = citySearchForm.value;
     console.log(city);
+    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt=2023-03-03'
     
 
     // check if city input is empty
-    if (!city) {
+     if (!city) {
 
         console.log("need city name")
     } else {
         // get the longitude and latitude of the input city
-        var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
-
+        // var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
+       
         // waits for response from open cage api
         try{
-            let response = await fetch(openCageApiUrl);
+            let response = await fetch(weatherApiUrl);
             let data = await response.json();
-            var longitude = data.results[0].geometry.lng;
-            var latitude = data.results[0].geometry.lat;
+            console.log(data);
+         var avTemp = data.forecast.forecastday[0].day.avgtemp_f
         }catch(error){
             console.log(error);        
         }        
         finally {
             console.log("Weather fetched");
+            
         };
 
         //invoke a function eventSearch
-        eventSearch(longitude, latitude);
+        eventSearch();
+        displayWeather(avTemp);
     }
     citySearchForm.value = "";
 })
