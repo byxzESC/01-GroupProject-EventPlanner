@@ -133,7 +133,18 @@ function displayWeather (avTemp) {
             let response = await fetch(weatherApiUrl);
             let data = await response.json();
             console.log(data);
-         var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+            var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+            console.log("temp: ", avTemp)
+            var locName = data.location.name
+            console.log("name: ", locName)
+            var dateW = data.forecast.forecastday[0].date
+            console.log("date: ", dateW)
+            var condition = data.forecast.forecastday[0].hour[3].condition.text
+            console.log("conditon: ", condition)
+            var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
+            console.log("icon: ", conditionIcon)
+            var wind = data.forecast.forecastday[0].day.maxwind_mph
+            console.log("wind: ", wind)
         }catch(error){
             console.log(error);        
         }        
