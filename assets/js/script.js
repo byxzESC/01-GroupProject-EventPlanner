@@ -3,12 +3,18 @@
 var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
+var startDateISO
+var endDateISO
+searchBtn.addEventListener("click", function(){
+    var startDate = document.getElementById('startDate').valueAsDate;
+    var endDate = document.getElementById('endDate').valueAsDate;
+    var startDateISO = startDate.toISOString().split('T', 1);
+    var endDateISO = endDate.toISOString().split('T', 1);
+    eventSearch(citySearchForm.value, inputVal.value, startDateISO, endDateISO);
+    console.log(startDateISO)
+    console.log(endDateISO)
+});
 
-var startDate = document.getElementById('startDate').value;
-var endDate = document.getElementById('endDate').value;
-startDate = startDate+"-01";
-endDate = endDate+"-31";
-                    
 // user enter city name, date range, and pick genre
     // fetch using user input, and area radius
     // send fetched data to display event
@@ -18,9 +24,9 @@ endDate = endDate+"-31";
 
 
 // fetch event data function accepting cityName as an argument
-var eventSearch = function (city, genre, dateRange) {
+var eventSearch = function (city, genre, startDate, endDate) {
 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt=2023-03-03'
 
     // fetch ticketmaster using cityName
@@ -121,14 +127,14 @@ d3.select('#search-submit-button').on('click', function (event) {
     var city = citySearchForm.value;
     var genre = inputVal.nodes()[0].value
     var dateRange;
-    console.log(`searched city is ${city}, genre is ${genre}, and dateRange ${dateRange}`);
+    console.log(`searched city is ${city}, genre is ${genre}, and dateRange ${startDateISO} - ${endDateISO}`);
     
     // check if city input is empty
      if (!city) {
         console.log("need city name")
     } else {
         //invoke a function eventSearch
-        eventSearch(city, genre, dateRange);
+        eventSearch(city, genre, startDate, endDate);
     }
     citySearchForm.value = "";
 })
