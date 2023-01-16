@@ -1,4 +1,3 @@
-
 var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
@@ -198,14 +197,11 @@ d3.select('#search-submit-button').on('click', function (event) {
          // check if user entered city, start date, and end date 
         // this appends modal  when inputs aren't selected 
         // need to figure how to loop modal for everytime the search doesn't have city name inputed
+        console.log('if is triggered')
         d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
 
         // adventListener for the understood modal button to close modal
-        d3.select('#close').on('click', function (event) {
-            event.preventDefault();
-            // remove previous search results
-            d3.selectAll('#staticBackdrop').remove()
-        });
+      
             
         // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
         console.log("need city name");
@@ -217,6 +213,11 @@ d3.select('#search-submit-button').on('click', function (event) {
     citySearchForm.value = "";
 })
 
+d3.select('#understood').on('click', function (event) {
+    event.preventDefault();
+    // remove previous search results
+    d3.selectAll('#staticBackdrop').style('display', 'none')
+});
 // submit-button alteration codes
     // inside else statement
         // displayWeather(avTemp);
