@@ -79,7 +79,7 @@ function callWeather(date, city){
         if (response.ok) {
             response.json().then(function (data) {
                 // console.log(data);
-                eventWeather = data.forecast.forecastday[0];
+                eventWeather = data.forecast.forecastday;
                 // console.log(weather)
                 displayWeather(eventWeather);
             })
@@ -90,12 +90,36 @@ function callWeather(date, city){
 
 //function displayWeather accepts data
 // --- displays weather --- location, date, temp, condition, condition icon, wind
-function displayWeather (WeatherData) {
+function displayWeather (weatherData) {
     // .avghumidity, .avgtemp_f, .maxwind_mph, hour[].condition.icon <-- is a URL, hour[].condition.text, .date
     console.log('date is', eventDate);
-    console.log('this is weather data ', WeatherData)
+    console.log('this is weather data ', weatherData)
 
     //TODO: select eCard element correctly, display weatherData, and append to it
+
+
+    var cardBod = d3.select('.eCard');
+                cardBod.selectAll('article')
+                        .data(weatherData)
+                        .enter()
+                        .append('article')
+                        .style('border', 'solid',)
+                        .attr('id', 'weather')
+                        // this will display background color for weather info
+                        .style("background", "red")
+                        // added all the data needed to display date, temp, condition, condition icon, wind
+                        // need to know how to diplay icon but that will be the correct the correct link
+                        .text( 'Date: '+weatherData[0].date +
+                         ' Temperature: '+weatherData[0].day.avgtemp_f + "°F" + 
+                         " conditon: "+weatherData[0].hour[3].condition.text + 
+                         " Condition Icon: https:"+weatherData[0].hour[3].condition.icon +  
+                         "  wind: "+weatherData[0].day.maxwind_mph+"mph");
+    // this is to remove weather from eCard
+            d3.select('.eCard').on('click', function (event) {
+            event.preventDefault();
+            // remove previous search results
+            d3.selectAll('#weather').remove()
+            }); 
 
     // .html(`<p>Temperature: ${currentEventWeather.avgtemp_f}</P>`)
     // var cardBod = d3.select('#eCard');
@@ -106,13 +130,13 @@ function displayWeather (WeatherData) {
     //         .style('border', 'solid')
     //         .text('Temperature: ' + currentEventWeather.avgtemp_f)     
     
-    var weatherForecast = d3.select('[data-selected]');
-    console.log('eCard element ', weatherForecast._groups[0]);
+    // var weatherForecast = d3.select('[data-selected]');
+    // console.log('eCard element ', weatherForecast._groups[0]);
     // weatherForecast.select('p').data(data).enter().append('p')
     //     .attr('class', 'weatherForecast')
     //     .text('Temperature: ' + currentEventWeather.avgtemp_f);
-    weatherForecast.append('p').html(`Temperature: ${currentEventWeather.avgtemp_f}`)
-    console.log('eCard element ', weatherForecast._groups[0].siblings());
+    // weatherForecast.append('p').html(`Temperature: ${currentEventWeather.avgtemp_f}`)
+    // console.log('eCard element ', weatherForecast._groups[0].siblings());
 
 
 
