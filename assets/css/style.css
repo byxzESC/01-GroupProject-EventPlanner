@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #54BAB9;
+    --primary-color: #1f2937;
     --secondary-color: #18978F;
     --accent-color: #E9DAC1;
     --special-color: #F7ECDE;
@@ -7,8 +7,8 @@
     --dark: #242B2E;
     --white: #CAD5E2;
 
-    --tailwind-bg: #e5e5e5;
-    --tailwind-text: #111827;
+    --tailwind-bg: #27272a;
+    --tailwind-text: #6ee7b7;
     --tailwind-cardBg: #0d9488;
 }
 
@@ -49,15 +49,13 @@ body {
     width: auto;
 }
 
-.weatherForecast {
-    display: inline-block;
-    border: var(--dark) 6px solid;
-    color: var(--special-color-2);
-    margin: 2px 1px;
-}
-
 .modal {
     text-align: center;
     padding: 0;
-    margin-left: 600px;
-  }
+    /* margin-left: 600px; */
+    /* left: 25vw; */
+}
+
+#weather-info {
+    padding-left: 2rem; 
+}
