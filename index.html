@@ -42,8 +42,9 @@
         <div>
             <button type="button" id="search-submit-button"
                 class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700 "
-                data-bs-toggle="" data-bs-target="#staticBackdrop">Search</button>
-                <!-- add modal into data-bs-toggle to toggle modal -->
+                 data-bs-target="#staticBackdrop">Search</button>
+                
+                <!-- add modal into data-bs-toggle to toggle modal data-bs-toggle="modal" -->
         </div>
         <div class="modal fade fixed top-50% left-50% items-center hidden w-half h-full outline-none overflow-x-hidden overflow-y-auto"
             id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -57,15 +58,10 @@
                         <h5 class="text-xl font-medium leading-normal text-black" id="exampleModalLabel">
                             This is a reminder:
                         </h5>
-                        <button type="button"
-                            class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:opacity-100 hover:text-black hover:opacity-75"
-                            data-bs-dismiss="modal" aria-label="Close">
-                            ❌
-                        </button>
                     </div>
 
                     <div class="modal-body relative text-black bg-red p-4">
-                        You must enter your city name, and choose your dates.
+                        You must enter your city name, select your event type, and choose your dates to start.
                     </div>
 
                     <div class="modal-body relative text-black bg-red p-4">
@@ -74,7 +70,7 @@
 
                     <div
                         class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                        <button type="button"
+                        <button type="button" id="close"
                             class="inline-block px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700 "
                             data-bs-dismiss="modal">Understood</button>
                     </div>
