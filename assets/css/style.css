@@ -55,3 +55,9 @@ body {
     color: var(--special-color-2);
     margin: 2px 1px;
 }
+
+.modal {
+    text-align: center;
+    padding: 0;
+    margin-left: 600px;
+  }

@@ -114,13 +114,14 @@ function displayWeather (weatherData) {
                          " conditon: "+weatherData[0].hour[3].condition.text + 
                          " Condition Icon: https:"+weatherData[0].hour[3].condition.icon +  
                          "  wind: "+weatherData[0].day.maxwind_mph+"mph");
-    // this is to remove weather from eCard
+        // this is to remove weather from eCard
             d3.select('.eCard').on('click', function (event) {
             event.preventDefault();
             // remove previous search results
             d3.selectAll('#weather').remove()
             }); 
 
+// CODE THAT WAS TRIED
     // .html(`<p>Temperature: ${currentEventWeather.avgtemp_f}</P>`)
     // var cardBod = d3.select('#eCard');
     // cardBod.selectAll('p')
