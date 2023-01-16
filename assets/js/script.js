@@ -164,7 +164,13 @@ function displayWeather (weatherData) {
     var cardEl = document.querySelector('[data-selected=focused]');
     var weatherForecast = document.createElement('p');
     weatherForecast.setAttribute('id', 'weather-info');
-    weatherForecast.textContent = '-----------------Temperature: ' + weatherData[0].day.avgtemp_f;
+    var TemperatureEl = document.createElement('p');
+    var conditionEl = document.createElement('p')
+    TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
+    conditionEl.textContent = `conditon: "${weatherData[0].hour[3].condition.text}`;
+    
+    weatherForecast.append(TemperatureEl);
+    weatherForecast.append(conditionEl)
     cardEl.append(weatherForecast);
 
     // TODO: if statement data-selected's value is focused, we do something
