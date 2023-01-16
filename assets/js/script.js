@@ -119,28 +119,7 @@ function displayWeather (weatherData) {
             // event.preventDefault();
             // d3.selectAll('#weather').remove()
             // }); 
-    // var cardBod = d3.select('.eCard');
-    //             cardBod.selectAll('article')
-    //                     .data(weatherData)
-    //                     .enter()
-    //                     .append('article')
-    //                     .style('border', 'solid',)
-    //                     .attr('id', 'weather')
-    //                     // this will display background color for weather info
-    //                     .style("background", "red")
-    //                     // added all the data needed to display date, temp, condition, condition icon, wind
-    //                     // need to know how to diplay icon but that will be the correct the correct link
-    //                     .text( 'Date: '+weatherData[0].date +
-    //                      ' Temperature: '+weatherData[0].day.avgtemp_f + "°F" + 
-    //                      " conditon: "+weatherData[0].hour[3].condition.text + 
-    //                      " Condition Icon: https:"+weatherData[0].hour[3].condition.icon +  
-    //                      "  wind: "+weatherData[0].day.maxwind_mph+"mph");
-    //     // this is to remove weather from eCard
-    //         d3.select('.eCard').on('click', function (event) {
-    //         event.preventDefault();
-    //         // remove previous search results
-    //         d3.selectAll('#weather').remove()
-    //         }); 
+ 
 
 // CODE THAT WAS TRIED
     // .html(`<p>Temperature: ${currentEventWeather.avgtemp_f}</P>`)
@@ -161,16 +140,26 @@ function displayWeather (weatherData) {
     // console.log('eCard element ', weatherForecast._groups[0].siblings());
 
     // testing with JS codes
+    // --- displays weather --- location, date, temp, condition, condition icon, wind
     var cardEl = document.querySelector('[data-selected=focused]');
     var weatherForecast = document.createElement('p');
     weatherForecast.setAttribute('id', 'weather-info');
     var TemperatureEl = document.createElement('p');
-    var conditionEl = document.createElement('p')
+    var conditionEl = document.createElement('p');
+    var windEL = document.createElement('p');
+    var conditionIconEl = document.createElement('img');
+    var iconUrl = "https:" +weatherData[0].hour[3].condition.icon;
+    console.log("this is icoon: ", iconUrl)
     TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
-    conditionEl.textContent = `conditon: "${weatherData[0].hour[3].condition.text}`;
+    conditionEl.textContent = `conditon: ${weatherData[0].hour[3].condition.text}`;
+    windEL.textContent = `wind: ${weatherData[0].day.maxwind_mph}mph`;
+    conditionIconEl.setAttribute('src', iconUrl);
+    console.log(conditionIconEl);
     
     weatherForecast.append(TemperatureEl);
-    weatherForecast.append(conditionEl)
+    weatherForecast.append(windEL);
+    weatherForecast.append(conditionEl);
+    weatherForecast.append(conditionIconEl);
     cardEl.append(weatherForecast);
 
     // TODO: if statement data-selected's value is focused, we do something
@@ -201,7 +190,7 @@ d3.select('#search-submit-button').on('click', function (event) {
         d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
 
         // adventListener for the understood modal button to close modal
-        d3.select('#close').on('click', function (event) {
+        d3.select('#understood').on('click', function (event) {
             event.preventDefault();
             // remove previous search results
             d3.selectAll('#staticBackdrop').remove()
