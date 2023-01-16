@@ -125,6 +125,7 @@ function displayWeather (WeatherData) {
     // cardEl.append(weatherForecast);
 }
 
+
 //event listener on search submit of cityName
 d3.select('#search-submit-button').on('click', function (event) {
     event.preventDefault();
@@ -137,10 +138,25 @@ d3.select('#search-submit-button').on('click', function (event) {
     var startDate = d3.select('#startDate').nodes()[0].value
     var endDate = d3.select('#endDate').nodes()[0].value
 
-    console.log(`SEARCH BUTTON: searched city is ${city}, genre is ${genre}, and dateRange ${startDate} - ${endDate}`);
-     if (!city || !startDate || !endDate) {
-        // check if user entered city, start date, and end date
+
+    
+    // check if city input is empty
+     if (!city || !startDate || !endDate) { 
+         // check if user entered city, start date, and end date 
+        // this appends modal  when inputs aren't selected 
+        // need to figure how to loop modal for everytime the search doesn't have city name inputed
+        d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
+
+        // adventListener for the understood modal button to close modal
+        d3.select('#close').on('click', function (event) {
+            event.preventDefault();
+            // remove previous search results
+            d3.selectAll('#staticBackdrop').remove()});
+            
+        // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
+        console.log("need city name");
         console.log("need city name, start date, end date");
+        
     } else {
         eventSearch(city, genre, startDate, endDate);
     }
