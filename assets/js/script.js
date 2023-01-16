@@ -4,17 +4,9 @@ var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
 
-var startDateISO
-var endDateISO
-searchBtn.addEventListener("click", function(){
-    var startDate = document.getElementById('startDate').valueAsDate;
-    var endDate = document.getElementById('endDate').valueAsDate;
-    var startDateISO = startDate.toISOString().split('T', 1);
-    var endDateISO = endDate.toISOString().split('T', 1);
-    eventSearch(citySearchForm.value, inputVal.value, startDateISO, endDateISO);
-    console.log(startDateISO)
-    console.log(endDateISO)
-});
+var startDate
+var endDate
+var weather
 
 
 var ticketInfo = d3.select('#ticketInfo')
@@ -31,10 +23,11 @@ var date;
 
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, startDate, endDate) {
+    console.log(startDate)
+    console.log(endDate)
 
-
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
-    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt=2023-03-03'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+startDate
 
    
 
@@ -81,58 +74,60 @@ function displayEvent (data, city) {
     // append elements to weatherInfo
     d3.select('#ticketInfo').selectAll('#eCard').on('click', function(){
         date = this.querySelector('.event-date').getAttribute('value')
-        // console.log(date)
+         console.log(date)
         // pass in date and city to fetch weather data
         // display weather info with d3
         // append weather info to ticketInfo
-        var weather = displayWeather(date, city)
-        console.log('weather has ', weather);
-        d3.select('#ticketInfo')
-        .data(weather)
-        .enter()
-        .append('div')
-        .attr('id', 'weather-info')
-        .text(weather.forecast.forecastday[0].day)
+        callWeather(date, city)
      });
 
 }
 
 
-// ticketInfo.nodes()[0].on('click', function(){
-//    console.log("I've been clicked");
-// });
-
-//function displayWeather accepts data
-// --- displays weather --- location, date, temp, condition, condition icon, wind
-function displayWeather (date, city) {
-    // console.log('date is', date);
+function callWeather(date, city){
     var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+date;
-    var weather;
 
     fetch(weatherApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
-                // avTemp = data.forecast.forecastday[0].day;
-                // displayWeather(avTemp);
-                // var avTemp = data.forecast.forecastday[0].day.avgtemp_f
-                // console.log("temp: ", avTemp)
-                // var locName = data.location.name
-                // console.log("name: ", locName)
-                // var dateW = data.forecast.forecastday[0].date
-                // console.log("date: ", dateW)
-                // var condition = data.forecast.forecastday[0].hour[3].condition.text
-                // console.log("conditon: ", condition)
-                // var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
-                // console.log("icon: ", conditionIcon)
-                // var wind = data.forecast.forecastday[0].day.maxwind_mph
-                // console.log("wind: ", wind)
-            }) 
+                // console.log(data);
+                weather = data.forecast.forecastday
+                console.log(weather)
+                displayWeather(weather)
+            })
+           
         }
-    })
-
-    return weather;
+        }) 
 }
+
+//function displayWeather accepts data
+// --- displays weather --- location, date, temp, condition, condition icon, wind
+function displayWeather (weather) {
+     console.log('date is', date);
+     console.log('this is weather data', weather)
+     var cardBod = d3.select('#eCard')
+                        .selectAll('div')
+                        .data(weather)
+                        .enter()
+                        .append('div')
+                        .text('Temperature: '+weather[0].day.avgtemp_f)
+                    
+    
+    }
+    // avTemp = data.forecast.forecastday[0].day;
+    // displayWeather(avTemp);
+    // var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+    // console.log("temp: ", avTemp)
+    // var locName = data.location.name
+    // console.log("name: ", locName)
+    // var dateW = data.forecast.forecastday[0].date
+    // console.log("date: ", dateW)
+    // var condition = data.forecast.forecastday[0].hour[3].condition.text
+    // console.log("conditon: ", condition)
+    // var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
+    // console.log("icon: ", conditionIcon)
+    // var wind = data.forecast.forecastday[0].day.maxwind_mph
+    // console.log("wind: ", wind)
 
 //event listener on search submit of cityName
 // d3.select('#search-submit-button').on('click', async function (event) {
@@ -144,8 +139,15 @@ d3.select('#search-submit-button').on('click', function (event) {
     var city = citySearchForm.value;
     var genre = inputVal.nodes()[0].value
     var dateRange;
+    startDate = d3.select('#startDate').nodes()[0].value
+    endDate = d3.select('#endDate').nodes()[0].value
 
-    console.log(`SEARCHBTN PRESSED searched city is ${city}, genre is ${genre}, and dateRange ${startDateISO} - ${endDateISO}`);
+    console.log(startDate)
+    console.log(endDate)
+    console.log(`SEARCHBTN PRESSED searched city is ${city}, genre is ${genre}, and dateRange ${startDate} - ${endDate}`);
+
+    // eventSearch(citySearchForm.value, inputVal.value, startDate, endDate);
+
 
     
     // check if city input is empty
