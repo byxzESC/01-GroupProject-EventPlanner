@@ -61,7 +61,8 @@ function displayEvent (data, city) {
     // append elements to eCard "weatherInfo"
     d3.select('#ticketInfo').selectAll('.eCard').on('click', function(){
         // TODO:: selectAll data-selected and remove all data-selected attribute from them
-
+        d3.selectAll('.eCard').attr('data-selected', 'none')
+        d3.selectAll('#weather-info').remove();
         eventDate = this.querySelector('.event-date').getAttribute('value')
         // assign a special attribute to --this--
         // and later could use it to select this particular element to append weather info to
@@ -99,6 +100,25 @@ function displayWeather (weatherData) {
     //TODO: select eCard element correctly, display weatherData, and append to it
 
 
+    // var cardBod = d3.select('.eCard');
+    //             cardBod.selectAll('article')
+    //                     .data(weatherData)
+    //                     .enter()
+    //                     .append('article')
+    //                     .style('border', 'solid',)
+    //                     .attr('id', 'weather')
+    //                     .style("background", "red")
+
+    //                     .text( 'Date: '+weatherData[0].date +
+    //                      ' Temperature: '+weatherData[0].day.avgtemp_f + "°F" + 
+    //                      " conditon: "+weatherData[0].hour[3].condition.text + 
+    //                      " Condition Icon: https:"+weatherData[0].hour[3].condition.icon +  
+    //                      "  wind: "+weatherData[0].day.maxwind_mph+"mph");
+    // this is to remove weather from eCard
+            // d3.select('.eCard').on('click', function (event) {
+            // event.preventDefault();
+            // d3.selectAll('#weather').remove()
+            // }); 
     var cardBod = d3.select('.eCard');
                 cardBod.selectAll('article')
                         .data(weatherData)
@@ -135,20 +155,22 @@ function displayWeather (weatherData) {
     // var weatherForecast = d3.select('[data-selected]');
     // console.log('eCard element ', weatherForecast._groups[0]);
     // weatherForecast.select('p').data(data).enter().append('p')
-    //     .attr('class', 'weatherForecast')
-    //     .text('Temperature: ' + currentEventWeather.avgtemp_f);
-    // weatherForecast.append('p').html(`Temperature: ${currentEventWeather.avgtemp_f}`)
+        // .attr('class', 'weatherForecast')
+        // .text('Temperature: ' + currentEventWeather.avgtemp_f);
+    // weatherForecast.append('p').html(`Temperature: ${weatherData[0].day.avgtemp_f}`)
     // console.log('eCard element ', weatherForecast._groups[0].siblings());
 
-
-
     // testing with JS codes
-    // var cardEl = document.getElementsByClassName('eCard');
-    // var test = document.getElementById('ticketInfo');
-    // var weatherForecast = document.createElement('p');
-    // weatherForecast.textContent = '-----------------Temperature: ' + currentEventWeather.avgtemp_f;
-    // test.append(weatherForecast);
-    // cardEl.append(weatherForecast);
+    
+    var cardEl = document.querySelector('[data-selected]');
+    var weatherForecast = document.createElement('p');
+    weatherForecast.setAttribute('id', 'weather-info');
+    weatherForecast.textContent = '-----------------Temperature: ' + weatherData[0].day.avgtemp_f;
+    cardEl.append(weatherForecast);
+
+    // TODO: if statement data-selected's value is focused, we do something
+    // change its focus state when other element being focused. 
+    // and remove weather content in it.
 }
 
 
@@ -177,7 +199,8 @@ d3.select('#search-submit-button').on('click', function (event) {
         d3.select('#close').on('click', function (event) {
             event.preventDefault();
             // remove previous search results
-            d3.selectAll('#staticBackdrop').remove()});
+            d3.selectAll('#staticBackdrop').remove()
+        });
             
         // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
         console.log("need city name");
