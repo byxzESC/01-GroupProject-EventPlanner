@@ -27,7 +27,7 @@ var eventSearch = function (city, genre, startDate, endDate) {
     console.log(endDate)
 
     var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+genre+'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
-    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+startDate
+    // var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+startDate
 
    
 
@@ -90,7 +90,9 @@ function callWeather(date, city){
     fetch(weatherApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
+                console.log(data);
+                // localName = data.location.name
+                // console.log("this is: ", localName)
                 weather = data.forecast.forecastday
                 console.log(weather)
                 displayWeather(weather)
@@ -106,15 +108,32 @@ function displayWeather (weather) {
      console.log('date is', date);
      console.log('this is weather data', weather)
      var cardBod = d3.select('#eCard');
-                        cardBod.selectAll('article')
-                        .data(weather)
-                        .enter()
-                        .append('article')
-                        .style('border', 'solid')
-                        .text('Temperature: '+weather[0].day.avgtemp_f)
-                    
-    
-    }
+        cardBod.selectAll('article')
+                .data(weather)
+                .enter()
+                .append('article')
+                .style('border', 'solid',)
+                .attr('id', 'weather')
+                // this will display background color for weather info
+                .style("background", "red")
+                // added all the data needed to display date, temp, condition, condition icon, wind
+                // need to know how to diplay icon but that will be the correct the correct link
+                .text( 'Date: '+weather[0].date +
+                 ' Temperature: '+weather[0].day.avgtemp_f + "°F" + 
+                 " conditon: "+weather[0].hour[3].condition.text + 
+                 " Condition Icon: https:"+weather[0].hour[3].condition.icon +  
+                 "  wind: "+weather[0].day.maxwind_mph+"mph");
+                 
+            
+    // this is to remove weather from eCard
+    d3.select('#eCard').on('click', function (event) {
+    event.preventDefault();
+    // remove previous search results
+    d3.selectAll('#weather').remove()
+    }); 
+          
+     }
+     
     // avTemp = data.forecast.forecastday[0].day;
     // displayWeather(avTemp);
     // var avTemp = data.forecast.forecastday[0].day.avgtemp_f
@@ -152,8 +171,20 @@ d3.select('#search-submit-button').on('click', function (event) {
 
     
     // check if city input is empty
-     if (!city) {
-        console.log("need city name")
+     if (!city) {   
+        // this appends modal  when inputs aren't selected 
+        // need to figure how to loop modal for everytime the search doesn't have city name inputed
+        d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
+
+        // adventListener for the understood modal button to close modal
+        d3.select('#close').on('click', function (event) {
+            event.preventDefault();
+            // remove previous search results
+            d3.selectAll('#staticBackdrop').remove()});
+            
+        // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
+        console.log("need city name");
+        
     } else {
         //invoke a function eventSearch
         eventSearch(city, genre, startDate, endDate);
