@@ -6,111 +6,115 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- google fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
+    <!-- css style sheet -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>Event Planner</title>
-
 </head>
 
 <body>
-    <div class="text-left bg-neutral-200 text-gray-900 py-4 pl-12 ml-12">
+    
+    <div class="text-left bg-zinc-800 text-Emerald-300 py-4 pl-12 ml-12">
         <header>
-            <h1 class="text-5xl font-bold mt-0 mb-6">Master Planner!!!</h1>
+            <h1
+                class="mt-0 mb-6 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-emerald-300 to-blue-400">
+                Master Planner!!!</h1>
         </header>
     </div>
-    <div class="bg-neutral-200 text-gray-900 my-2 mx-4" id="search">
+
+    <div class="bg-zinc-800 text-Emerald-300 my-2 mx-4" id="search">
         <!-- input for user -->
         <input type="text" id="city-search-input" placeholder="enter city name here">
 
-        <div class="form-group border-2 py-2 px-2">
+        <div class="form-group">
             <label for="recipient-name" class="col-form-label">Event Type:</label>
-            <select id="inputState" class="form-control mb-4">
-                <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">Please Select Option</option>
+            <select id="genre-options" class="form-control mb-4">
+                <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">Please Select
+                    Option</option>
                 <option value="music">Music</option>
                 <option value="sports">Sports</option>
                 <option value="comedy">Comedy</option>
                 <option value="arts&theatre">Arts & Theatre</option>
                 <option value="film">Film</option>
                 <option value="fairs&festivals">Fairs & Festivals</option>
-                
+
             </select>
         </div>
-        <label for="start">Event starts after:</label>
-        <input type="date" id="startDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd" >
+        
+        <div>
+            <label for="start">Event starts after:</label>
+            <input type="date" id="startDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd">
+    
+    
+            <label for="start">Event starts before:</label>
+            <input type="date" id="endDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd" />
+        </div>
 
-
-        <label for="start">Event starts before:</label>
-        <input type="date" id="endDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd" />
         <div>
             <button type="button" id="search-submit-button"
                 class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700 "
-                 data-bs-target="#staticBackdrop">Search</button>
-                
-                <!-- add modal into data-bs-toggle to toggle modal data-bs-toggle="modal" -->
+                data-bs-target="#staticBackdrop">
+                Search
+            </button>
         </div>
-        <div class="modal fade fixed top-50% left-50% items-center hidden w-half h-full outline-none overflow-x-auto overflow-y-auto"
-            id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog relative w-auto pointer-events-none">
-
-                <div
-                    class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white  bg-clip-padding rounded-md outline-none text-current">
-                    <div
-                        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                        <h5 class="text-xl font-medium leading-normal text-black" id="exampleModalLabel">
-                            This is a reminder:
-                        </h5>
-                    </div>
-
-                    <div class="modal-body relative text-black bg-red p-4">
-                        You must enter your city name, select your event type, and choose your dates to start.
-                    </div>
-
-                    <div class="modal-body relative text-black bg-red p-4">
-                        Also due to covid, restriction may apply to the event you like to attend.
-                    </div>
-
-                    <div
-                        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                        <button type="button" id="understood"
-                            class="inline-block px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700 "
-                            data-bs-dismiss="modal">Understood</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
+    <!-- add modal into data-bs-toggle to toggle modal data-bs-toggle="modal" -->
+    <div class="modal fade fixed top-50 left-50 items-center hidden outline-none overflow-x-auto overflow-y-auto"
+        id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog relative w-auto pointer-events-none">
+
+            <div
+                class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white  bg-clip-padding rounded-md outline-none text-current">
+                <div
+                    class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                    <h5 class="text-xl font-medium leading-normal text-black" id="exampleModalLabel">
+                        As a reminder:
+                    </h5>
+                </div>
+
+                <div class="modal-body relative text-black bg-red p-4">
+                    You must enter your city name, select your event type, and choose your dates to start.
+                </div>
+
+                <div class="modal-body relative text-black bg-red p-4">
+                    Also due to covid, restriction may apply to the event you like to attend.
+                </div>
+
+                <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    <button type="button" id="understood"
+                        class="inline-block px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700 "
+                        data-bs-dismiss="modal">Understood</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- append search result card to here -->
     <div id="search-result">
-        <aside id="weatherInfo">
-            <h2 class="event-weather">Weather for event day:</h2>
-            <ul class="weather-log"></ul>
-
-            <!-- append weather here -->
-        </aside>
-
         <section id="ticketInfo" class="flex, flex-wrap, flex-row"></section>
     </div>
 
-
-
-
-    <!-- append ticket info here -->
+    <!-- tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
+    <!-- D3.js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
         integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js"
         integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- js script -->
     <script src="assets/js/script.js"></script>
-
-
 </body>
 
 </html>

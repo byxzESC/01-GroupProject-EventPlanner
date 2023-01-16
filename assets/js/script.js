@@ -1,20 +1,9 @@
-var searchBtn = document.getElementById('search-submit-button');
-var citySearchForm = document.getElementById('city-search-input');
-var inputVal = d3.select('#inputState');
 
-// moved global declaration var to line 139
-// changed names for more clarity
+var citySearchForm = d3.select('#city-search-input');
+var genreOptions = d3.select('#genre-options');
+var ticketInfo = d3.select('#ticketInfo')
 var eventWeather;
 var eventDate;
-var ticketInfo = d3.select('#ticketInfo')
-
-// user enter city name, date range, and pick genre
-    // fetch using user input, and area radius
-    // send fetched data to display event
-
-// user click event 
-    // display weather and more info
-
 
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, startDate, endDate) {
@@ -38,6 +27,7 @@ var eventSearch = function (city, genre, startDate, endDate) {
         openModal(city);
     });
 }
+
 function openModal(city){
     var modal = d3.select('body')
         .append('div')
@@ -53,7 +43,6 @@ function openModal(city){
         });
     content.append('p')
         .html('Event type is unavailable in '+ city + '. Please pick a different event type.');
-
 }
 
 //function displayEvent accepts data
@@ -63,7 +52,8 @@ function displayEvent (data, city) {
     .selectAll('div')
     .data(data)
     .enter()
-    .append('div').attr('class', 'eCard').attr('tabindex', '1')
+    .append('div')
+    .attr('class', 'eCard').attr('tabindex', '1')
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
@@ -113,16 +103,124 @@ function callWeather(date, city){
     })
 }
 
-//function displayWeather accepts data
-// --- displays weather --- location, date, temp, condition, condition icon, wind
+//function displayWeather accepts weatherData
 function displayWeather (weatherData) {
-    // .avghumidity, .avgtemp_f, .maxwind_mph, hour[].condition.icon <-- is a URL, hour[].condition.text, .date
+    // --- displays weather --- location, date, temp, condition, condition icon, wind
+    // .avghumidity, .avgtemp_f, .maxwind_mph, hour[].condition.icon <-- is a URL, hour[]condition.text, .date
     console.log('date is', eventDate);
     console.log('this is weather data ', weatherData)
 
-    //TODO: select eCard element correctly, display weatherData, and append to it
+    var cardEl = document.querySelector('[data-selected=focused]');
+    var weatherForecast = document.createElement('p');
+    weatherForecast.setAttribute('id', 'weather-info');
+    var TemperatureEl = document.createElement('p');
+    var conditionEl = document.createElement('p');
+    var windEL = document.createElement('p');
+    var conditionIconEl = document.createElement('img');
+    var iconUrl = "https:" +weatherData[0].hour[3].condition.icon;
+    console.log("this is icoon: ", iconUrl)
+    TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
+    conditionEl.textContent = `conditon: ${weatherData[0].hour[3].condition.text}`;
+    windEL.textContent = `wind: ${weatherData[0].day.maxwind_mph}mph`;
+    conditionIconEl.setAttribute('src', iconUrl);
+    console.log(conditionIconEl);
+    
+    weatherForecast.append(TemperatureEl);
+    weatherForecast.append(windEL);
+    weatherForecast.append(conditionEl);
+    weatherForecast.append(conditionIconEl);
+    cardEl.append(weatherForecast);
+
+}
 
 
+//event listener on search submit of cityName
+d3.select('#search-submit-button').on('click', function (event) {
+    event.preventDefault();
+    // remove previous search results
+    d3.selectAll('.eCard').remove()
+
+    // these var gets declare and assign to variables every time --- base on user input
+    var city = citySearchForm.value;
+    var genre = genreOptions.nodes()[0].value
+    var startDate = d3.select('#startDate').nodes()[0].value
+    var endDate = d3.select('#endDate').nodes()[0].value
+
+    // check if city and date input are empty
+     if (!city || !startDate || !endDate) { 
+        d3.select("#staticBackdrop").style('display', 'block').classed("show", true);
+        console.log("need city name, start date, end date");
+    } else {
+        eventSearch(city, genre, startDate, endDate);
+    }
+    citySearchForm.value = "";
+})
+
+d3.select('#understood').on('click', function (event) {
+    event.preventDefault();
+    // remove previous search results
+    d3.selectAll('#staticBackdrop').style('display', 'none')
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// submit-button alteration codes
+    // inside else statement
+        // displayWeather(avTemp);
+        // get the longitude and latitude of the input city
+        // var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
+       
+        // waits for response from open cage api
+        // d3.select('#search-submit-button').on('click', async function (event) {
+        // try{
+        //     let response = await fetch(weatherApiUrl);
+        //     let data = await response.json();
+        //     console.log(data);
+        //     var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+        //     console.log("temp: ", avTemp)
+        //     var locName = data.location.name
+        //     console.log("name: ", locName)
+        //     var dateW = data.forecast.forecastday[0].date
+        //     console.log("date: ", dateW)
+        //     var condition = data.forecast.forecastday[0].hour[3].condition.text
+        //     console.log("conditon: ", condition)
+        //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
+        //     console.log("icon: ", conditionIcon)
+        //     var wind = data.forecast.forecastday[0].day.maxwind_mph
+        //     console.log("wind: ", wind)
+        // }catch(error){
+        //     console.log(error);        
+        // }        
+        // finally {
+        //     console.log("Weather fetched");
+            
+        // };
+
+
+// display Weather backup codes
     // var cardBod = d3.select('.eCard');
     //             cardBod.selectAll('article')
     //                     .data(weatherData)
@@ -161,117 +259,3 @@ function displayWeather (weatherData) {
         // .text('Temperature: ' + currentEventWeather.avgtemp_f);
     // weatherForecast.append('p').html(`Temperature: ${weatherData[0].day.avgtemp_f}`)
     // console.log('eCard element ', weatherForecast._groups[0].siblings());
-
-    // testing with JS codes
-    // --- displays weather --- location, date, temp, condition, condition icon, wind
-    var cardEl = document.querySelector('[data-selected=focused]');
-    var weatherForecast = document.createElement('p');
-    weatherForecast.setAttribute('id', 'weather-info');
-    var TemperatureEl = document.createElement('p');
-    var conditionEl = document.createElement('p');
-    var windEL = document.createElement('p');
-    var conditionIconEl = document.createElement('img');
-    var iconUrl = "https:" +weatherData[0].hour[3].condition.icon;
-    console.log("this is icoon: ", iconUrl)
-    TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
-    conditionEl.textContent = `conditon: ${weatherData[0].hour[3].condition.text}`;
-    windEL.textContent = `wind: ${weatherData[0].day.maxwind_mph}mph`;
-    conditionIconEl.setAttribute('src', iconUrl);
-    console.log(conditionIconEl);
-    
-    weatherForecast.append(TemperatureEl);
-    weatherForecast.append(windEL);
-    weatherForecast.append(conditionEl);
-    weatherForecast.append(conditionIconEl);
-    cardEl.append(weatherForecast);
-
-    // TODO: if statement data-selected's value is focused, we do something
-    // change its focus state when other element being focused. 
-    // and remove weather content in it.
-}
-
-
-//event listener on search submit of cityName
-d3.select('#search-submit-button').on('click', function (event) {
-    event.preventDefault();
-    // remove previous search results
-    d3.selectAll('.eCard').remove()
-
-    // these var gets declare and assign to variables every time --- base on user input
-    var city = citySearchForm.value;
-    var genre = inputVal.nodes()[0].value
-    var startDate = d3.select('#startDate').nodes()[0].value
-    var endDate = d3.select('#endDate').nodes()[0].value
-
-
-    
-    // check if city input is empty
-     if (!city || !startDate || !endDate) { 
-         // check if user entered city, start date, and end date 
-        // this appends modal  when inputs aren't selected 
-        // need to figure how to loop modal for everytime the search doesn't have city name inputed
-        console.log('if is triggered')
-        d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
-
-        // adventListener for the understood modal button to close modal
-
-        d3.select('#understood').on('click', function (event) {
-            event.preventDefault();
-            // remove previous search results
-            d3.selectAll('#staticBackdrop').remove()
-        });
-
-            
-        // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
-        console.log("need city name");
-        console.log("need city name, start date, end date");
-        
-    } else {
-        eventSearch(city, genre, startDate, endDate);
-    }
-    citySearchForm.value = "";
-})
-
-d3.select('#understood').on('click', function (event) {
-    event.preventDefault();
-    // remove previous search results
-    d3.selectAll('#staticBackdrop').style('display', 'none')
-});
-// submit-button alteration codes
-    // inside else statement
-        // displayWeather(avTemp);
-        // get the longitude and latitude of the input city
-        // var openCageApiUrl =  'https://api.opencagedata.com/geocode/v1/json?q=' + city + '&current_weather=true&key=5ffc6c893abd4262b33abf21d8deab53';
-       
-        // waits for response from open cage api
-        // d3.select('#search-submit-button').on('click', async function (event) {
-        // try{
-        //     let response = await fetch(weatherApiUrl);
-        //     let data = await response.json();
-        //     console.log(data);
-        //     var avTemp = data.forecast.forecastday[0].day.avgtemp_f
-        //     console.log("temp: ", avTemp)
-        //     var locName = data.location.name
-        //     console.log("name: ", locName)
-        //     var dateW = data.forecast.forecastday[0].date
-        //     console.log("date: ", dateW)
-        //     var condition = data.forecast.forecastday[0].hour[3].condition.text
-        //     console.log("conditon: ", condition)
-        //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
-        //     console.log("icon: ", conditionIcon)
-        //     var wind = data.forecast.forecastday[0].day.maxwind_mph
-        //     console.log("wind: ", wind)
-        // }catch(error){
-        //     console.log(error);        
-        // }        
-        // finally {
-        //     console.log("Weather fetched");
-            
-        // };
-
-
-
-
-
-
-
