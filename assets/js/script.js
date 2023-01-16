@@ -1,4 +1,3 @@
-
 var searchBtn = document.getElementById('search-submit-button');
 var citySearchForm = document.getElementById('city-search-input');
 var inputVal = d3.select('#inputState');
@@ -25,12 +24,36 @@ var eventSearch = function (city, genre, startDate, endDate) {
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log('eventSearch result ', data)
+               if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
                 displayEvent(data._embedded.events, city)
+                console.log('eventSearch result ', data)
+               } else{
+                openModal(city);
+               }
             }) 
             
         }
-    })
+    }).catch(function(error){
+        console.error(error);
+        openModal(city);
+    });
+}
+function openModal(city){
+    var modal = d3.select('body')
+        .append('div')
+        .attr('class', 'modal')
+        .style('display', 'block');
+    var content = modal.append('div')
+        .attr('class', 'modal-content');
+    content.append('span')
+        .attr('class', 'close')
+        .html('&times;')
+        .on('click' , function(){
+            modal.style('display', 'none');
+        });
+    content.append('p')
+        .html('Event type is unavailable in '+ city + '. Please pick a different event type.');
+
 }
 
 //function displayEvent accepts data
@@ -187,14 +210,17 @@ d3.select('#search-submit-button').on('click', function (event) {
          // check if user entered city, start date, and end date 
         // this appends modal  when inputs aren't selected 
         // need to figure how to loop modal for everytime the search doesn't have city name inputed
+        console.log('if is triggered')
         d3.select("#staticBackdrop").style('display', 'block').classed("show", true).text();
 
         // adventListener for the understood modal button to close modal
+
         d3.select('#understood').on('click', function (event) {
             event.preventDefault();
             // remove previous search results
             d3.selectAll('#staticBackdrop').remove()
         });
+
             
         // console.log(d3.select("#staticBackdrop").classed("<div>", false).text());
         console.log("need city name");
@@ -206,6 +232,11 @@ d3.select('#search-submit-button').on('click', function (event) {
     citySearchForm.value = "";
 })
 
+d3.select('#understood').on('click', function (event) {
+    event.preventDefault();
+    // remove previous search results
+    d3.selectAll('#staticBackdrop').style('display', 'none')
+});
 // submit-button alteration codes
     // inside else statement
         // displayWeather(avTemp);
