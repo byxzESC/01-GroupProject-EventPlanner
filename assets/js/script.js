@@ -21,41 +21,32 @@ var date;
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, dateRange) {
 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n';
    
-
     // fetch ticketmaster using cityName
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
+                console.log('eventSearch result ', data)
                 displayEvent(data._embedded.events, city)
             }) 
         }
     })
-    // fetch weather using the cityName
-   
-
 }
+
 // super cool text
 // font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
 
 //function displayEvent accepts data
 function displayEvent (data, city) {
+    // .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
 
     // creates element for event info
     d3.select('#ticketInfo')
     .selectAll('div')
     .data(data)
     .enter()
-    .append('div')
-    .attr('id', 'eCard')
-
-    .attr('tabindex', '1')
-
-    
-
-    .classed('card, my-2, mx-4, bg-teal-600, text-white, border, border-black, border-solid, flex-1' , true)
+    .append('div').attr('id', 'eCard').attr('tabindex', '1')
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
@@ -68,15 +59,26 @@ function displayEvent (data, city) {
          if(dta.priceRanges){
          return "Min: $" + dta.priceRanges[0].min + " Max: $" + dta.priceRanges[0].max
     } else {
-      return "N/A"}
-    })
-
+      return "N/A"
+    }
+    });
+});
     // append elements to weatherInfo
     d3.select('#ticketInfo').selectAll('#eCard').on('click', function(){
         date = this.querySelector('.event-date').getAttribute('value')
-        console.log(date)
-        displayWeather(date, city)
-     })
+        // console.log(date)
+        // pass in date and city to fetch weather data
+        // display weather info with d3
+        // append weather info to ticketInfo
+        var weather = displayWeather(date, city)
+        console.log('weather has ', weather);
+        d3.select('#ticketInfo')
+        .data(weather)
+        .enter()
+        .append('div')
+        .attr('id', 'weather-info')
+        .text(weather.forecast.forecastday[0].day)
+     });
 
 }
 
@@ -88,47 +90,33 @@ function displayEvent (data, city) {
 //function displayWeather accepts data
 // --- displays weather --- location, date, temp, condition, condition icon, wind
 function displayWeather (date, city) {
-        console.log('date is', date);
+    // console.log('date is', date);
+    var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+date;
+    var weather;
 
-        var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+date
+    fetch(weatherApiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+                // avTemp = data.forecast.forecastday[0].day;
+                // displayWeather(avTemp);
+                // var avTemp = data.forecast.forecastday[0].day.avgtemp_f
+                // console.log("temp: ", avTemp)
+                // var locName = data.location.name
+                // console.log("name: ", locName)
+                // var dateW = data.forecast.forecastday[0].date
+                // console.log("date: ", dateW)
+                // var condition = data.forecast.forecastday[0].hour[3].condition.text
+                // console.log("conditon: ", condition)
+                // var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
+                // console.log("icon: ", conditionIcon)
+                // var wind = data.forecast.forecastday[0].day.maxwind_mph
+                // console.log("wind: ", wind)
+            }) 
+        }
+    })
 
-        fetch(weatherApiUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data);
-                    avTemp = data.forecast.forecastday[0].day;
-                    // displayWeather(avTemp);
-            //     var avTemp = data.forecast.forecastday[0].day.avgtemp_f
-            //     console.log("temp: ", avTemp)
-            //     var locName = data.location.name
-            //     console.log("name: ", locName)
-            //     var dateW = data.forecast.forecastday[0].date
-            //     console.log("date: ", dateW)
-            //     var condition = data.forecast.forecastday[0].hour[3].condition.text
-            //     console.log("conditon: ", condition)
-            //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
-            //     console.log("icon: ", conditionIcon)
-            //     var wind = data.forecast.forecastday[0].day.maxwind_mph
-            //     console.log("wind: ", wind)
-                }) 
-            }
-        })
-    
-    //   var localDate = data._embedded.events[0].dates.start.localDate
-    // console.log(data)
-    // var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+inputVal+'&dt='+localDate+''
-    //     var locName = data.location.name
-    //     console.log("name: ", locName)
-    //     var dateW = data.forecast.forecastday[0].date
-    //     console.log("date: ", dateW)
-    //     var condition = data.forecast.forecastday[0].hour[3].condition.text
-    //     console.log("conditon: ", condition)
-    //     var conditionIcon = data.forecast.forecastday[0].hour[3].condition.icon
-    //     console.log("icon: ", conditionIcon)
-    //     var wind = data.forecast.forecastday[0].day.maxwind_mph
-    //     console.log("wind: ", wind)
-
-
+    return weather;
 }
 
 //event listener on search submit of cityName
@@ -141,7 +129,7 @@ d3.select('#search-submit-button').on('click', function (event) {
     var city = citySearchForm.value;
     var genre = inputVal.nodes()[0].value
     var dateRange;
-    console.log(`searched city is ${city}, genre is ${genre}, and dateRange ${dateRange}`);
+    console.log(`SEARCHBTN PRESSED searched city is ${city}, genre is ${genre}, and dateRange ${dateRange}`);
     
     // check if city input is empty
      if (!city) {
@@ -152,9 +140,6 @@ d3.select('#search-submit-button').on('click', function (event) {
     }
     citySearchForm.value = "";
 })
-
-d3.select('#eCards')
-    
 
 // submit-button codes
     // inside else statement
@@ -186,10 +171,6 @@ d3.select('#eCards')
         //     console.log("Weather fetched");
             
         // };
-
-
-
-
 
 
 
