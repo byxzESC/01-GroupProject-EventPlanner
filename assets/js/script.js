@@ -24,12 +24,36 @@ var eventSearch = function (city, genre, startDate, endDate) {
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log('eventSearch result ', data)
+               if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
                 displayEvent(data._embedded.events, city)
+                console.log('eventSearch result ', data)
+               } else{
+                openModal(city);
+               }
             }) 
             
         }
-    })
+    }).catch(function(error){
+        console.error(error);
+        openModal(city);
+    });
+}
+function openModal(city){
+    var modal = d3.select('body')
+        .append('div')
+        .attr('class', 'modal')
+        .style('display', 'block');
+    var content = modal.append('div')
+        .attr('class', 'modal-content');
+    content.append('span')
+        .attr('class', 'close')
+        .html('&times;')
+        .on('click' , function(){
+            modal.style('display', 'none');
+        });
+    content.append('p')
+        .html('Event type is unavailable in '+ city + '. Please pick a different event type.');
+
 }
 
 //function displayEvent accepts data
