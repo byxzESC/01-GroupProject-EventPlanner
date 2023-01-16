@@ -26,7 +26,7 @@ var eventSearch = function (city, genre, startDate, endDate) {
     console.log(startDate)
     console.log(endDate)
 
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+ genre +'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName='+genre+'&startDateTime='+startDate+'T00:00:01Z&endDateTime='+endDate+'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n'
     var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q='+city+'&dt='+startDate
 
    
@@ -54,7 +54,7 @@ function displayEvent (data, city) {
     .selectAll('div')
     .data(data)
     .enter()
-    .append('div').attr('id', 'eCard').attr('tabindex', '1')
+    .append('div').attr('id', 'eCard').attr('tabindex', '1').attr('class', 'flex flex-right')
     .each(function(d) {
         d3.select(this).html(
             `<div class="card-body">
@@ -105,11 +105,12 @@ function callWeather(date, city){
 function displayWeather (weather) {
      console.log('date is', date);
      console.log('this is weather data', weather)
-     var cardBod = d3.select('#eCard')
-                        .selectAll('div')
+     var cardBod = d3.select('#eCard');
+                        cardBod.selectAll('article')
                         .data(weather)
                         .enter()
-                        .append('div')
+                        .append('article')
+                        .style('border', 'solid')
                         .text('Temperature: '+weather[0].day.avgtemp_f)
                     
     
