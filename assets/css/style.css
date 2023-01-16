@@ -32,7 +32,7 @@ body {
 
 }
 
-#eCard {
+.eCard {
     display: inline-block;
     background-color: var(--tailwind-cardBg);
     color: white;
@@ -44,7 +44,14 @@ body {
     padding: 8px;
 }
 
-#eCard:focus {
+.eCard:focus {
     min-width: 610px;
     width: auto;
+}
+
+.weatherForecast {
+    display: inline-block;
+    border: var(--dark) 6px solid;
+    color: var(--special-color-2);
+    margin: 2px 1px;
 }
