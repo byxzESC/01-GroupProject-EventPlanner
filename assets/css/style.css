@@ -33,7 +33,7 @@ body {
 }
 
 .eCard {
-    display: inline-block;
+    display: inline-flex;
     background-color: var(--tailwind-cardBg);
     color: white;
     border: var(--dark) 2px solid;
