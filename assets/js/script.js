@@ -19,8 +19,8 @@ var ticketInfo = d3.select('#ticketInfo')
 
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, startDate, endDate) {
-    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&q=' + city + '&classificationName=' + genre + '&startDateTime=' + startDate+ 'T00:00:01Z&endDateTime=' + endDate + 'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n';
-
+    var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&city=' + city + '&classificationName=' + genre + '&startDateTime=' + startDate+ 'T00:00:01Z&endDateTime=' + endDate + 'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n';
+    console.log(ticketMasterApiUrl)
     // fetch ticketmaster using cityName
     fetch(ticketMasterApiUrl).then(function (response) {
         if (response.ok) {
@@ -28,6 +28,7 @@ var eventSearch = function (city, genre, startDate, endDate) {
                 console.log('eventSearch result ', data)
                 displayEvent(data._embedded.events, city)
             }) 
+            
         }
     })
 }
