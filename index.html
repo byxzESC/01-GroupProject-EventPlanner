@@ -27,27 +27,32 @@
 
     <!-- search section  -->
     <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1 my-2 mx-2 bg-zinc-800 text-Emerald-300 " id="search">
-        <div class="form-group city-name-genre">
-            <input type="text" id="city-search-input" class="rounded-md indent-2" placeholder="enter city here">
-            
-            <label for="recipient-name" class="col-form-label ml-4">Event Type:</label>
-            <select id="genre-options" class="form-control mb-4 text-zinc-800 rounded-md">
-                <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">
-                    Select Genre Option</option>
-                <option value="music">Music</option>
-                <option value="sports">Sports</option>
-                <option value="comedy">Comedy</option>
-                <option value="arts&theatre">Arts & Theatre</option>
-                <option value="film">Film</option>
-                <option value="fairs&festivals">Fairs & Festivals</option>
-            </select>
+        <div class="form-group city-name-genre grid md:grid-cols-2 lg:grid-cols-2">
+            <input type="text" id="city-search-input" class="rounded-md indent-2 my-2 mx-2 "
+                placeholder="enter city here">
+
+            <div class="my-2 mx-2">
+                <label for="recipient-name" class="col-form-label ml-4">Event Type:</label>
+                <select id="genre-options" class="form-control text-xl mb-4 text-zinc-800 rounded-md">
+                    <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">
+                        Select Genre Option</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="arts&theatre">Arts & Theatre</option>
+                    <option value="film">Film</option>
+                    <option value="fairs&festivals">Fairs & Festivals</option>
+                </select>
+            </div>
         </div>
 
-        <div class="start-end-date">
-            <label for="start">Event starts from</label>
-            <input type="date" id="startDate" name="start" min="2023-02-01" value="" class="indent-1 text-zinc-800 rounded-md">
-            <label for="start"> to </label>
-            <input type="date" id="endDate" name="start" min="2023-02-01" value="" class="indent-1 text-zinc-800 rounded-md" />
+        <div class="start-end-date text-xl ">
+            <label for="start" class="px-4">Event starts from</label>
+            <input type="date" id="startDate" name="start" min="2023-02-01" value=""
+                class="indent-1 text-zinc-800 rounded-md px-4"/>
+            <label for="end" class="px-4" > to </label>
+            <input type="date" id="endDate" name="start" min="2023-02-01" value=""
+                class="indent-1 text-zinc-800 rounded-md px-4"/>
         </div>
 
         <div>
@@ -73,7 +78,7 @@
                 </div>
 
                 <div class="modal-body relative text-black bg-red p-4">
-                    You must enter your city name, select your event type, and choose your dates to start.
+                    Require a city name, selected event type, and a chosen period .
                 </div>
 
                 <div class="modal-body relative text-black bg-red p-4">
@@ -94,7 +99,7 @@
     <div id="history"></div>
     <!-- append search result card to here -->
     <div id="search-result">
-        <section id="ticketInfo" class="flex, flex-wrap, flex-row"></section>
+        <section id="ticketInfo" class="flex flex-wrap flex-row mx-8"></section>
     </div>
 
     <!-- tailwind CSS -->

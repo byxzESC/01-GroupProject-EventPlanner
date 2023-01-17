@@ -29,18 +29,22 @@ text-align: center;
 }
 
 .start-end-date{
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    margin: 0 7%;
 }
 
 .city-name-genre {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: space-evenly;
+    margin: 0 7%;
 }
 #search-result {
     margin: 24px 16px;
 }
 
-#weatherInfo div {
-    padding: 1.5rem 1rem;
+.card-body {
+    padding: 0 1rem 0 0;
 }
 
 #ticketInfo {
@@ -48,7 +52,7 @@ text-align: center;
 }
 
 .eCard {
-    display: flex;
+    display: inline-flex;
     justify-content: space-around;
     background-color: var(--tailwind-cardBg);
     color: white;
@@ -67,5 +71,5 @@ text-align: center;
 }
 
 #weather-info {
-    padding-left: 2rem; 
+
 }
