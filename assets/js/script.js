@@ -8,15 +8,14 @@ var currSearch = {};
 var storeSearch = [];
 
 
-function init() {
+function displayPreviousSearch() {
     
     storeSearch = JSON.parse(localStorage.getItem("searchObj"));
 
     if (storeSearch === null) {
-    storeSearch = [];
-     } else {
+        storeSearch = [];
+    } else {
     
-        console.log(storeSearch)
         d3.select('#history')
             .selectAll('button')
             .data(storeSearch)
@@ -40,17 +39,12 @@ function init() {
                 pastGenre = this.dataset.genre
                 pastStart = this.dataset.sdate
                 pastEnd = this.dataset.edate
-                console.log(this)
+
                 eventSearch(pastCity, pastGenre, pastStart, pastEnd);
-        })
-            
-        }
+            })
     }
+}
     
-
-
-
-
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, startDate, endDate) {
     var ticketMasterApiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?&city=' + city + '&classificationName=' + genre + '&startDateTime=' + startDate+ 'T00:00:01Z&endDateTime=' + endDate + 'T23:59:59Z&radius=50&apikey=9guoY8HVvZn5Dz76zhZz9omQCGJGNs7n';
@@ -74,6 +68,7 @@ var eventSearch = function (city, genre, startDate, endDate) {
     });
 }
 
+// if selected city doesn't have any event
 function openModal(city) {
     var modal = d3.select('body')
         .append('div')
@@ -113,18 +108,21 @@ function displayEvent (data, city) {
     .data(data)
     .enter()
     .append('div')
-    .attr('class', 'eCard').attr('tabindex', '1')
+    .attr('class', 'eCard')
+    .attr('tabindex', '1')
     .each(function(d) {
-        d3.select(this).html(
-            `<div class="card-body">
+        // "this" is the div element being created on line 107
+        // "d" is each variable in data
+        d3.select(this)
+        .html(`<div class="card-body">
                 <h5 class="card-title text-white h-16">${d.name}</h5>
                 <p class="event-date" value='${d.dates.start.localDate}'>${d.dates.start.localDate}</p>
-                <a href="${d.url}"><button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700">More Info</button></a> 
-                `)
-        .selectChild().insert('p')
+                <a href="${d.url}"><button class="inline-block px-2.5 py-1 bg-white font-medium text-teal-600 rounded hover:bg-teal-700">More Info</button></a>`)
+        .selectChild()
+        .insert('p')
         .text(function(dta) {
             if(dta.priceRanges){
-                return "Price ranges $" + dta.priceRanges[0].min + " - $" + dta.priceRanges[0].max;
+                return "Price $" + dta.priceRanges[0].min + " - $" + dta.priceRanges[0].max;
             } else {
                 return "Price ranges N/A";
             }
@@ -133,7 +131,7 @@ function displayEvent (data, city) {
 
     // append elements to eCard "weatherInfo"
     d3.select('#ticketInfo').selectAll('.eCard').on('click', function(){
-        // TODO:: selectAll data-selected and remove all data-selected attribute from them
+        //select all data-selected and set value to none
         d3.selectAll('.eCard').attr('data-selected', 'none')
         d3.selectAll('#weather-info').remove();
         eventDate = this.querySelector('.event-date').getAttribute('value')
@@ -146,42 +144,39 @@ function displayEvent (data, city) {
      });
 }
 
-// fetch weather data after user select an event
+// fetch weather data after user selected an event
 function callWeather(date, city){
     var weatherApiUrl = 'https://api.weatherapi.com/v1/future.json?key=4e031b93d3c141019f0220405231401&q=' + city + '&dt=' + date;
 
     fetch(weatherApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
                 eventWeather = data.forecast.forecastday;
-                // console.log(weather)
                 displayWeather(eventWeather);
             })
-           
         }
     })
 }
 
 //function displayWeather accepts weatherData
 function displayWeather (weatherData) {
-    // --- displays weather --- location, date, temp, condition, condition icon, wind
-    // .avghumidity, .avgtemp_f, .maxwind_mph, hour[].condition.icon <-- is a URL, hour[]condition.text, .date
+
     console.log('date is', eventDate);
     console.log('this is weather data ', weatherData)
 
     var cardEl = document.querySelector('[data-selected=focused]');
     var weatherForecast = document.createElement('p');
-    weatherForecast.setAttribute('id', 'weather-info');
     var TemperatureEl = document.createElement('p');
     var conditionEl = document.createElement('p');
     var windEL = document.createElement('p');
     var conditionIconEl = document.createElement('img');
     var iconUrl = "https:" +weatherData[0].hour[3].condition.icon;
-    console.log("this is icoon: ", iconUrl)
-    TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
-    conditionEl.textContent = `conditon: ${weatherData[0].hour[3].condition.text}`;
-    windEL.textContent = `wind: ${weatherData[0].day.maxwind_mph}mph`;
+
+    // console.log("this is icoon: ", iconUrl)
+    weatherForecast.setAttribute('id', 'weather-info');
+    TemperatureEl.textContent = `Temp: ${weatherData[0].day.avgtemp_f}°F`;
+    conditionEl.textContent = weatherData[0].hour[3].condition.text;
+    windEL.textContent = `Wind: ${weatherData[0].day.maxwind_mph}mph`;
     conditionIconEl.setAttribute('src', iconUrl);
     console.log(conditionIconEl);
     
@@ -210,7 +205,6 @@ d3.select('#search-submit-button').on('click', function (event) {
     console.log(startDate, endDate)
     // check if city and date input are empty
      if (!city || !startDate || !endDate) { 
-        // d3.select("#staticBackdrop").style('display', 'block').classed("show", true);
         d3.select("#staticBackdrop").classed("visible", true).classed("hidden", false);
         console.log("need city name, start date, end date");
     } else {
@@ -218,7 +212,7 @@ d3.select('#search-submit-button').on('click', function (event) {
         currSearch = {search: city, genre, startDate, endDate};
         storeSearch.push(currSearch);
         localStorage.setItem('searchObj', JSON.stringify(storeSearch));
-        init();
+        displayPreviousSearch();
         eventSearch(city, genre, startDate, endDate);
     }
     citySearchForm.value = "";
@@ -231,8 +225,7 @@ d3.select('#understood').on('click', function (event) {
 });
 
 
-
-init();
+displayPreviousSearch();
 
 
 

@@ -14,6 +14,7 @@
 
 
 body {
+text-align: center;
     height: 100vh;
     background-color: var(--tailwind-bg);
     color: var(--tailwind-text);
@@ -27,12 +28,23 @@ body {
     display: contents;
 }
 
+.start-end-date{
+    display: inline-flex;
+    justify-content: center;
+    margin: 0 7%;
+}
+
+.city-name-genre {
+    display: inline-flex;
+    justify-content: space-evenly;
+    margin: 0 7%;
+}
 #search-result {
     margin: 24px 16px;
 }
 
-#weatherInfo div {
-    padding: 1.5rem 1rem;
+.card-body {
+    padding: 0 1rem 0 0;
 }
 
 #ticketInfo {
@@ -41,6 +53,7 @@ body {
 
 .eCard {
     display: inline-flex;
+    justify-content: space-around;
     background-color: var(--tailwind-cardBg);
     color: white;
     border: var(--dark) 2px solid;
@@ -52,18 +65,11 @@ body {
 }
 
 .eCard:focus {
+    max-width: 610px;
     min-width: 610px;
     width: auto;
 }
 
-.modal {
-    /* text-align: center;
-    padding: 0; */
-    /* margin-left: 600px; */
-    /* left: 25vw; */
-}
-
 #weather-info {
-    padding-left: 2rem; 
 
 }

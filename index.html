@@ -16,56 +16,56 @@
 </head>
 
 <body>
-    
-    <div class="text-left bg-zinc-800 text-Emerald-300 py-4 pl-12 ml-12">
+
+    <div class="text-left bg-zinc-800 text-Emerald-300 py-2 px-8">
         <header>
             <h1
                 class="mt-0 mb-6 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-emerald-300 to-blue-400">
-                Master Planner!!!</h1>
+                Master Planner 9000</h1>
         </header>
     </div>
 
-    <div class="bg-zinc-800 text-Emerald-300 my-2 mx-4" id="search">
-        <!-- input for user -->
-        <input type="text" id="city-search-input" placeholder="enter city name here">
+    <!-- search section  -->
+    <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1 my-2 mx-2 bg-zinc-800 text-Emerald-300 " id="search">
+        <div class="form-group city-name-genre grid md:grid-cols-2 lg:grid-cols-2">
+            <input type="text" id="city-search-input" class="rounded-md indent-2 my-2 mx-2 "
+                placeholder="enter city here">
 
-        <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Event Type:</label>
-            <select id="genre-options" class="form-control mb-4">
-                <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">Please Select
-                    Option</option>
-                <option value="music">Music</option>
-                <option value="sports">Sports</option>
-                <option value="comedy">Comedy</option>
-                <option value="arts&theatre">Arts & Theatre</option>
-                <option value="film">Film</option>
-                <option value="fairs&festivals">Fairs & Festivals</option>
-
-            </select>
+            <div class="my-2 mx-2">
+                <label for="recipient-name" class="col-form-label ml-4">Event Type:</label>
+                <select id="genre-options" class="form-control text-xl mb-4 text-zinc-800 rounded-md">
+                    <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">
+                        Select Genre Option</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="arts&theatre">Arts & Theatre</option>
+                    <option value="film">Film</option>
+                    <option value="fairs&festivals">Fairs & Festivals</option>
+                </select>
+            </div>
         </div>
-        
-        <div>
-            <label for="start">Event starts after:</label>
-            <input type="date" id="startDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd">
-    
-    
-            <label for="start">Event starts before:</label>
-            <input type="date" id="endDate" name="start" min="2023-02-01" value="" placeholder="yyyy-mm-dd" />
+
+        <div class="start-end-date text-xl ">
+            <label for="start" class="px-4">Event starts from</label>
+            <input type="date" id="startDate" name="start" min="2023-02-01" value=""
+                class="indent-1 text-zinc-800 rounded-md px-4"/>
+            <label for="end" class="px-4" > to </label>
+            <input type="date" id="endDate" name="start" min="2023-02-01" value=""
+                class="indent-1 text-zinc-800 rounded-md px-4"/>
         </div>
 
         <div>
             <button type="button" id="search-submit-button"
-                class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700 ">
+                class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700 focus:ring-blue-200 focus:border-blue-200">
                 Search
             </button>
         </div>
     </div>
 
-    <!-- add modal into data-bs-toggle to toggle modal data-bs-toggle="modal" -->
-    <!-- <div class="modal fade fixed top-50 left-50 items-center hidden outline-none overflow-x-auto overflow-y-auto"
-        id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true"> -->
-    <div class="modal fade fixed hidden inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm flex justify-center items-center" id="staticBackdrop">
+    <!-- modal -->
+    <div class="modal fade fixed hidden inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm flex justify-center items-center"
+        id="staticBackdrop">
         <div class="modal-dialog relative w-auto pointer-events-none">
 
             <div
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="modal-body relative text-black bg-red p-4">
-                    You must enter your city name, select your event type, and choose your dates to start.
+                    Require a city name, selected event type, and a chosen period .
                 </div>
 
                 <div class="modal-body relative text-black bg-red p-4">
@@ -96,15 +96,15 @@
         </div>
     </div>
 
-<div id="history"></div>
+    <div id="history"></div>
     <!-- append search result card to here -->
     <div id="search-result">
-        <section id="ticketInfo" class="flex, flex-wrap, flex-row"></section>
+        <section id="ticketInfo" class="flex flex-wrap flex-row mx-8"></section>
     </div>
 
     <!-- tailwind CSS -->
-    
-   
+
+
 
 
 
@@ -119,7 +119,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.js"
         integrity="sha512-xM6zLP34B+lxAnCaZRiqwEyyChLmBnF5yILyjeZFsK8XDoSCrKX6cU1RV6Pj75S+3EtbJGhWAwiIh3H2nTv2uw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <!-- js script -->
     <script src="assets/js/script.js"></script>
 </body>
