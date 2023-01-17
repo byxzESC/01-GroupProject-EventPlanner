@@ -14,10 +14,17 @@
 
 
 body {
-
     height: 100vh;
     background-color: var(--tailwind-bg);
     color: var(--tailwind-text);
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: contents;
 }
 
 #search-result {
@@ -50,16 +57,13 @@ body {
 }
 
 .modal {
-    text-align: center;
-    padding: 0;
-<<<<<<< Updated upstream
+    /* text-align: center;
+    padding: 0; */
     /* margin-left: 600px; */
     /* left: 25vw; */
 }
 
 #weather-info {
     padding-left: 2rem; 
-=======
-    margin-left: 600px;
->>>>>>> Stashed changes
+
 }
