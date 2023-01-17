@@ -1,9 +1,4 @@
 :root {
-    --primary-color: #1f2937;
-    --secondary-color: #18978F;
-    --accent-color: #E9DAC1;
-    --special-color: #F7ECDE;
-    --special-color-2: #FF4331;
     --dark: #242B2E;
     --white: #CAD5E2;
 
@@ -81,5 +76,28 @@ text-align: center;
 
     #search {
         margin: 1rem 15%;
+    }
+}
+
+@media only screen and (max-width: 663px) {
+    /* .eCard {
+        display: flex;
+        flex-direction: column;
+    } */
+
+    .eCard:focus {
+        max-width: 450px;
+        min-width: 450px;
+        width: auto;
+    }
+
+    .card-body {
+        text-align: left;
+    }
+
+    #weather-info {
+        text-align: left;
+        margin-top: 1rem;
+        margin-left: 1rem;
     }
 }
