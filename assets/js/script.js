@@ -4,6 +4,51 @@ var genreOptions = d3.select('#genre-options');
 var ticketInfo = d3.select('#ticketInfo')
 var eventWeather;
 var eventDate;
+var currSearch = {};
+var storeSearch = [];
+
+
+function init() {
+    
+    storeSearch = JSON.parse(localStorage.getItem("searchObj"));
+
+    if (storeSearch === null) {
+    storeSearch = [];
+     } else {
+    
+        console.log(storeSearch)
+        d3.select('#history')
+            .selectAll('button')
+            .data(storeSearch)
+            .enter()
+            .append('button')
+            .attr('class', 'pastCities')
+            .attr('type','button')
+            .each(function(d){
+                d3.select(this)
+            .attr('data-input', d.search)
+            .attr('data-genre', d.genre)
+            .attr('data-sdate', d.startDate)
+            .attr('data-edate', d.endDate)
+            .text(d.search)
+            .classed('pastCities inline-block mx-1 my2 px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700', true)
+            })
+            d3.selectAll('.pastCities').on('click', function(evt){
+                evt.preventDefault();
+                d3.selectAll('.eCard').remove()
+                pastCity = this.dataset.input
+                pastGenre = this.dataset.genre
+                pastStart = this.dataset.sdate
+                pastEnd = this.dataset.edate
+                console.log(this)
+                eventSearch(pastCity, pastGenre, pastStart, pastEnd);
+        })
+            
+        }
+    }
+    
+
+
 
 
 // fetch event data function accepting cityName as an argument
@@ -154,16 +199,23 @@ d3.select('#search-submit-button').on('click', function (event) {
 
     // these var gets declare and assign to variables every time --- base on user input
     var city = citySearchForm.value;
+    console.log(citySearchForm)
     var genre = genreOptions.nodes()[0].value
+    console.log(genre)
     var startDate = d3.select('#startDate').nodes()[0].value
     var endDate = d3.select('#endDate').nodes()[0].value
-
+    console.log(startDate, endDate)
     // check if city and date input are empty
      if (!city || !startDate || !endDate) { 
         // d3.select("#staticBackdrop").style('display', 'block').classed("show", true);
         d3.select("#staticBackdrop").classed("visible", true).classed("hidden", false);
         console.log("need city name, start date, end date");
     } else {
+        //Storing search in local storage
+        currSearch = {search: city, genre, startDate, endDate};
+        storeSearch.push(currSearch);
+        localStorage.setItem('searchObj', JSON.stringify(storeSearch));
+        init();
         eventSearch(city, genre, startDate, endDate);
     }
     citySearchForm.value = "";
@@ -177,7 +229,7 @@ d3.select('#understood').on('click', function (event) {
 
 
 
-
+init();
 
 
 
