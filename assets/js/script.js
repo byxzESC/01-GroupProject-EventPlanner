@@ -160,7 +160,8 @@ d3.select('#search-submit-button').on('click', function (event) {
 
     // check if city and date input are empty
      if (!city || !startDate || !endDate) { 
-        d3.select("#staticBackdrop").style('display', 'block').classed("show", true);
+        // d3.select("#staticBackdrop").style('display', 'block').classed("show", true);
+        d3.select("#staticBackdrop").classed("visible", true).classed("hidden", false);
         console.log("need city name, start date, end date");
     } else {
         eventSearch(city, genre, startDate, endDate);
@@ -171,7 +172,7 @@ d3.select('#search-submit-button').on('click', function (event) {
 d3.select('#understood').on('click', function (event) {
     event.preventDefault();
     // remove previous search results
-    d3.selectAll('#staticBackdrop').style('display', 'none')
+    d3.selectAll('#staticBackdrop').classed("hidden", true);
 });
 
 
