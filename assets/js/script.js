@@ -77,20 +77,23 @@ var eventSearch = function (city, genre, startDate, endDate) {
 function openModal(city) {
     var modal = d3.select('body')
         .append('div')
-        .attr('class', 'fixed top-50% left-50% items-center w-1/8 h-1/8 outline-none overflow-x-auto overflow-y-auto bg-white p-4')
+        .attr('class', 'fixed top-50 left-50 inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm w-1/8 h-1/8')
         .style('display', 'none');
 
-    var header = modal.append('div')
+    var content = modal.append('div')
+        .attr('class', 'relative flex flex-col justify-center items-center p-4 bg-white rounded-md')
+
+    var header = content.append('div')
         .attr('class', 'flex justify-center items-center pb-4');
     header.append('h3')
         .attr('class', 'text-xl font-medium leading-normal text-black')
         .text('Warning');
 
-    var body = modal.append('div')
-        .attr('class', 'text-black')
+    var body = content.append('div')
+        .attr('class', 'text-black text-center')
         .text('Event type is unavailable in ' + city + '. Please pick a different event type.');
 
-    var footer = modal.append('div')
+    var footer = content.append('div')
         .attr('class', 'flex justify-end items-center p-4');
     footer.append('button')
         .attr('class', 'px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700')
