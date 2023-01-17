@@ -153,9 +153,7 @@ function callWeather(date, city){
     fetch(weatherApiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
                 eventWeather = data.forecast.forecastday;
-                // console.log(weather)
                 displayWeather(eventWeather);
             })
            
@@ -178,9 +176,10 @@ function displayWeather (weatherData) {
     var windEL = document.createElement('p');
     var conditionIconEl = document.createElement('img');
     var iconUrl = "https:" +weatherData[0].hour[3].condition.icon;
-    console.log("this is icoon: ", iconUrl)
+
+    // console.log("this is icoon: ", iconUrl)
     TemperatureEl.textContent = `Temperature: ${weatherData[0].day.avgtemp_f}°F`;
-    conditionEl.textContent = `conditon: ${weatherData[0].hour[3].condition.text}`;
+    conditionEl.textContent = weatherData[0].hour[3].condition.text;
     windEL.textContent = `wind: ${weatherData[0].day.maxwind_mph}mph`;
     conditionIconEl.setAttribute('src', iconUrl);
     console.log(conditionIconEl);
