@@ -47,8 +47,8 @@ text-align: center;
     padding: 0 1rem 0 0;
 }
 
-#ticketInfo {
-
+#search {
+    margin: 1%;
 }
 
 .eCard {
@@ -72,4 +72,14 @@ text-align: center;
 
 #weather-info {
 
+}
+
+@media only screen and (min-width: 1024px) {
+    .header {
+        margin: 3% 7% 0 7%;
+    }
+
+    #search {
+        margin: 1rem 15%;
+    }
 }
