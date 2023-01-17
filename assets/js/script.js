@@ -1,9 +1,10 @@
 
-var citySearchForm = d3.select('#city-search-input');
+var citySearchForm = document.getElementById('city-search-input');
 var genreOptions = d3.select('#genre-options');
 var ticketInfo = d3.select('#ticketInfo')
 var eventWeather;
 var eventDate;
+
 
 // fetch event data function accepting cityName as an argument
 var eventSearch = function (city, genre, startDate, endDate) {
@@ -28,21 +29,32 @@ var eventSearch = function (city, genre, startDate, endDate) {
     });
 }
 
-function openModal(city){
+function openModal(city) {
     var modal = d3.select('body')
         .append('div')
-        .attr('class', 'modal')
-        .style('display', 'block');
-    var content = modal.append('div')
-        .attr('class', 'modal-content');
-    content.append('span')
-        .attr('class', 'close')
-        .html('&times;')
-        .on('click' , function(){
+        .attr('class', 'fixed top-50% left-50% items-center w-1/8 h-1/8 outline-none overflow-x-auto overflow-y-auto bg-white p-4')
+        .style('display', 'none');
+
+    var header = modal.append('div')
+        .attr('class', 'flex justify-center items-center pb-4');
+    header.append('h3')
+        .attr('class', 'text-xl font-medium leading-normal text-black')
+        .text('Warning');
+
+    var body = modal.append('div')
+        .attr('class', 'text-black')
+        .text('Event type is unavailable in ' + city + '. Please pick a different event type.');
+
+    var footer = modal.append('div')
+        .attr('class', 'flex justify-end items-center p-4');
+    footer.append('button')
+        .attr('class', 'px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700')
+        .text('OK')
+        .on('click', function() {
             modal.style('display', 'none');
         });
-    content.append('p')
-        .html('Event type is unavailable in '+ city + '. Please pick a different event type.');
+
+    modal.style('display', 'block');
 }
 
 //function displayEvent accepts data
