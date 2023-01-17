@@ -52,10 +52,14 @@ body {
 .modal {
     text-align: center;
     padding: 0;
+<<<<<<< Updated upstream
     /* margin-left: 600px; */
     /* left: 25vw; */
 }
 
 #weather-info {
     padding-left: 2rem; 
+=======
+    margin-left: 600px;
+>>>>>>> Stashed changes
 }
