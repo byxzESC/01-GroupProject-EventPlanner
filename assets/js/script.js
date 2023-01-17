@@ -30,7 +30,7 @@ function displayPreviousSearch() {
             .attr('data-sdate', d.startDate)
             .attr('data-edate', d.endDate)
             .text(d.search)
-            .classed('pastCities inline-block mx-1 my2 px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700', true)
+            .classed('pastCities inline-block mx-1 my-2 px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700', true)
             })
             d3.selectAll('.pastCities').on('click', function(evt){
                 evt.preventDefault();
@@ -70,16 +70,16 @@ var eventSearch = function (city, genre, startDate, endDate) {
 
 // if selected city doesn't have any event
 function openModal(city) {
-    var modal = d3.select('body')
+    var htmlBody = d3.select('body')
         .append('div')
-        .attr('class', 'fixed top-50 left-50 inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm w-1/8 h-1/8')
+        .attr('class', 'warningModal modal fade fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm justify-center items-center flex w-1/8 h-1/8')
         .style('display', 'none');
 
-    var content = modal.append('div')
-        .attr('class', 'relative flex flex-col justify-center items-center p-4 bg-white rounded-md')
+    var content = htmlBody.append('div')
+        .attr('class', 'justify-center items-center p-4 bg-white rounded-md')
 
     var header = content.append('div')
-        .attr('class', 'flex justify-center items-center pb-4');
+        .attr('class', ' justify-center items-center pb-4');
     header.append('h3')
         .attr('class', 'text-xl font-medium leading-normal text-black')
         .text('Warning');
@@ -94,10 +94,10 @@ function openModal(city) {
         .attr('class', 'px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700')
         .text('OK')
         .on('click', function() {
-            modal.style('display', 'none');
+            d3.select(".warningModal").style('display', 'none');
         });
 
-    modal.style('display', 'block');
+   d3.select(".warningModal").style('display', 'block')
 }
 
 //function displayEvent accepts data
