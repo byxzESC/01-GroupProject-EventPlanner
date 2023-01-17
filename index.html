@@ -17,7 +17,7 @@
 
 <body>
 
-    <div class="text-left bg-zinc-800 text-Emerald-300 py-2 px-8">
+    <div class="header text-left bg-zinc-800 text-Emerald-300 py-2 px-8">
         <header>
             <h1
                 class="mt-0 mb-6 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-emerald-300 to-blue-400">
@@ -27,13 +27,13 @@
 
     <!-- search section  -->
     <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1 my-2 mx-2 bg-zinc-800 text-Emerald-300 " id="search">
+
         <div class="form-group city-name-genre grid md:grid-cols-2 lg:grid-cols-2">
             <input type="text" id="city-search-input" class="rounded-md indent-2 my-2 mx-2 "
                 placeholder="enter city here">
-
             <div class="my-2 mx-2">
-                <label for="recipient-name" class="col-form-label ml-4">Event Type:</label>
-                <select id="genre-options" class="form-control text-xl mb-4 text-zinc-800 rounded-md">
+                <label for="recipient-name" class="col-form-label text-xl mr-2">Event Type:</label>
+                <select id="genre-options" class="form-control text-xl text-zinc-800 rounded-md">
                     <option value="sports, music, arts & theatre, film, fairs&festivals, comedy, family">
                         Select Genre Option</option>
                     <option value="music">Music</option>
@@ -46,18 +46,20 @@
             </div>
         </div>
 
-        <div class="start-end-date text-xl ">
-            <label for="start" class="px-4">Event starts from</label>
+        <div class="start-end-date text-xl grid md:grid-cols-2 sm:grid-cols-2 my-4 mx-2 md:max-lg:py-4 sm:max:md:py-2">
+            <label for="start" class="px-2 my-2">Event starts from</label>
             <input type="date" id="startDate" name="start" min="2023-02-01" value=""
-                class="indent-1 text-zinc-800 rounded-md px-4"/>
-            <label for="end" class="px-4" > to </label>
+                class="indent-1 text-zinc-800 rounded-md px-2 my-2 mx-4"/>
+
+            <label for="end" class="px-2 my-2" > to </label>
             <input type="date" id="endDate" name="start" min="2023-02-01" value=""
-                class="indent-1 text-zinc-800 rounded-md px-4"/>
+                class="indent-1 text-zinc-800 rounded-md px-2 my-2 mx-4"/>
+
         </div>
 
         <div>
             <button type="button" id="search-submit-button"
-                class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700 focus:ring-blue-200 focus:border-blue-200">
+                class="inline-block px-6 py-2.5 bg-teal-600 font-medium text-white rounded hover:bg-teal-700">
                 Search
             </button>
         </div>
