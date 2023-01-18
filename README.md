@@ -18,13 +18,13 @@
 
 Here is the Master Planner 9000 [Deployed site here](https://byxzesc.github.io/01-GroupProject-EventPlanner/)
 
-    Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can filter your search 
-    by genre and date range. On the event cards you will see the name of the event, the date of the event, a price range for tickets 
-    and a more "More Info" button. 
+    Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can 
+    filter your search by genre and date range. On the event cards you will see the name of the event, the date 
+    of the event, a price range for tickets and a more "More Info" button. 
     
-    You can click on the event card to widen it and display the predicted weather for that event, up to 300 days in the future. 
-    Once you have found an event you can click on the "More Info" button to take you to the ticketmaster website 
-    to find seating and ticket availabilites.
+    You can click on the event card to widen it and display the predicted weather for that event, up to 300 days 
+    in the future. Once you have found an event you can click on the "More Info" button to take you to the 
+    ticketmaster website to find seating and ticket availabilites.
 
 
 ![image of landing page](./assets/img/landingPage9000.png) 
@@ -32,11 +32,11 @@ Here is the Master Planner 9000 [Deployed site here](https://byxzesc.github.io/0
 
 ## Usage
 
-    You can search for a range of events filtered by genre or search all events by leaving the genre empty. You can also 
-    set a date range from the date picker but the weather feature only predicts up to 300 days. 
+    You can search for a range of events filtered by genre or search all events by leaving the genre empty. 
+    You can also set a date range from the date picker but the weather feature only predicts up to 300 days. 
     
-    The "More Info button is linked the Ticketmaster site to show you seating and available tickets. We display a price 
-    range from the cheapest ticket to the most expensive ticket.
+    The "More Info button is linked the Ticketmaster site to show you seating and available tickets. We 
+    display a price range from the cheapest ticket to the most expensive ticket.
 
 ## Weather Display
 ![image of weather cards](./assets/img/eventAndWeatherDisp.png)
@@ -49,12 +49,12 @@ Here is the Master Planner 9000 [Deployed site here](https://byxzesc.github.io/0
 
 ## Learning Points
 
-    During this project we gained experience calling on a server side API and dynamically displaying the parsed information to 
-    the page. The building of this app also called to dig into technical documentation to understand how to utilize the API 
-    and other new technologies such as TailwindCSS and D3.js. 
+    During this project we gained experience calling on a server side API and dynamically displaying the parsed 
+    information to the page. The building of this app also called to dig into technical documentation to 
+    understand how to utilize the API and other new technologies such as TailwindCSS and D3.js. 
     
-    The overall experience helped us get a better understanding how to work as a team and how to overcome obsticles 
-    in an efficient manner.
+    The overall experience helped us get a better understanding how to work as a team and how to overcome 
+    obsticles in an efficient manner.
 
 ## code snippets
 
