@@ -1,7 +1,7 @@
-# Master Planner
+# Master Planner 
 
 
-## technologies Used
+## Technologies Used
 
 | Technology Used         | Resource URL           | 
 | ------------- |:-------------:| 
@@ -17,7 +17,11 @@
 
 [Visit the deployed site here](https://byxzesc.github.io/01-GroupProject-EventPlanner/)
 
-Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can filter your search by genre and date range. On the event cards you will see the name of the event, the date of the event, a price range for tickets and a more "More Info" button. You can click on the event card to widen it and display the predicted weather for that event, up to 300 days in the future. Once you have found an event you can click on the "More Info" button to take you to the ticketmaster website to find seating and ticket availabilites.
+    Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can filter your search by genre and date range. 
+    
+    On the event cards you will see the name of the event, the date of the event, a price range for tickets and a more "More Info" button. 
+    
+    You can click on the event card to widen it and display the predicted weather for that event, up to 300 days in the future. Once you have found an event you can click on the "More Info" button to take you to the ticketmaster website to find seating and ticket availabilites.
 
 
 ![image of landing page](./assets/img/landingPage9000.png) 
@@ -25,7 +29,10 @@ Search any major city for a Ticketmaster event, such as Sporting events, Music c
 
 ## Usage
 
-You can search for a range of events filtered by genre or search all events by leaving the genre empty. You can also set a date range from the date picker but the weather feature only predicts up to 300 days. The "More Info button is linked the Ticketmaster site to show you seating and available tickets. We display a price range from the cheapest ticket to the most expensive ticket.
+    You can search for a range of events filtered by genre or search all events by leaving the genre empty. You can also set a date range from the date picker but the weather feature only predicts up to 300 days. 
+    
+    The "More Info button is linked the Ticketmaster site to show you seating and available tickets. We display a price range from the cheapest ticket to the most expensive ticket.
+
 ## Weather Display
 ![image of weather cards](./assets/img/eventAndWeatherDisp.png)
 ## Showcasing Local Storage
@@ -37,7 +44,18 @@ You can search for a range of events filtered by genre or search all events by l
 
 ## Learning Points
 
-During this project we gained experience calling on a server side API and dynamically displaying the parsed information to the page. The building of this app also called to dig into technical documentation to understand how to utilize the API and other new technologies such as TailwindCSS and D3.js. The overall experience helped us get a better understanding how to work as a team and how to overcome obsticles in an efficient manner.
+    During this project we gained experience calling on a server side API and dynamically displaying the parsed information to the page. The building of this app also called to dig into technical documentation to understand how to utilize the API and other new technologies such as TailwindCSS and D3.js. 
+    
+    The overall experience helped us get a better understanding how to work as a team and how to overcome obsticles in an efficient manner.
+
+## code snippets
+
+    Dynamically generate card code snippet
+![eCard code snippet](./assets/img/eCard.JPG)
+
+    Modal and its code snippet
+![modal](./assets/img/user%20validation.JPG)
+![modal code snippet](./assets/img/modal%20code.JPG)
 
 ## Arthor Info
 
