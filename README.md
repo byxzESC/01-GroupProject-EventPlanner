@@ -51,7 +51,13 @@ The groups github links:
 
 [Jonathan Pohahau](https://github.com/j-pohahau5)
 
+## Badges
 
+![badmath](https://img.shields.io/badge/HTML-10%25-orange)
+![badmath](https://img.shields.io/badge/CSS-10%25-blue)
+![badmath](https://img.shields.io/badge/Javascript-100%25-yellow)
+![badmath](https://img.shields.io/badge/D3.JS-300%25-orange)
+![badmath](https://img.shields.io/badge/Tailwind-300%25-blue)
 
 ## Credit
 
