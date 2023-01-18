@@ -68,8 +68,9 @@ var eventSearch = function (city, genre, startDate, endDate) {
     });
 }
 
-// if selected city doesn't have any event
+// if selected city doesn't have any event this function will create a warning modal
 function openModal(city) {
+    //selecting the body of the HTML and appending a div with a warning class
     var htmlBody = d3.select('body')
         .append('div')
         .attr('class', 'warningModal modal fade fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm justify-center items-center flex w-1/8 h-1/8')
@@ -77,26 +78,28 @@ function openModal(city) {
 
     var content = htmlBody.append('div')
         .attr('class', 'justify-center items-center p-4 bg-white rounded-md')
-
+    // Creates Modal header
     var header = content.append('div')
         .attr('class', ' justify-center items-center pb-4');
     header.append('h3')
         .attr('class', 'text-xl font-medium leading-normal text-black')
         .text('Warning');
-
+    // Creates Modal body
     var body = content.append('div')
         .attr('class', 'text-black text-center')
         .text('Event type is unavailable in ' + city + '. Please pick a different event type.');
-
+    // Creates Modal footer
     var footer = content.append('div')
         .attr('class', 'flex justify-end items-center p-4');
+    // Appending a button to footer
     footer.append('button')
         .attr('class', 'px-6 py-2.5 bg-teal-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-teal-700')
         .text('OK')
+    // When the OK button is clicked, the modal is set to be hidden again
         .on('click', function() {
             d3.select(".warningModal").style('display', 'none');
         });
-
+// makes the modal visible
    d3.select(".warningModal").style('display', 'block')
 }
 
