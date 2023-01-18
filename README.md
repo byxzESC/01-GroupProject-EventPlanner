@@ -19,13 +19,12 @@
 Here is the Master Planner 9000 [Deployed site here](https://byxzesc.github.io/01-GroupProject-EventPlanner/)
 
     Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can filter your search 
-    by genre and date range. On the event cards you will see the name of the event, the date of the event, a price 
-    range for tickets and a more "More Info" button. 
+    by genre and date range. On the event cards you will see the name of the event, the date of the event, a price range for tickets 
+    and a more "More Info" button. 
     
-    You can click on the event card to widen it and display the predicted weather for that event, 
-    up to 300 days in the future. 
-    Once you have found an event you can click on the "More Info" button to take you to the ticketmaster 
-    website to find seating and ticket availabilites.
+    You can click on the event card to widen it and display the predicted weather for that event, up to 300 days in the future. 
+    Once you have found an event you can click on the "More Info" button to take you to the ticketmaster website 
+    to find seating and ticket availabilites.
 
 
 ![image of landing page](./assets/img/landingPage9000.png) 
