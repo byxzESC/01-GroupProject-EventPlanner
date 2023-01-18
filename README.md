@@ -15,7 +15,8 @@
 
 ## Description
 
-[Visit the deployed site here](https://byxzesc.github.io/01-GroupProject-EventPlanner/)
+
+Here is the Master Planner 9000 [Deployed site here](https://byxzesc.github.io/01-GroupProject-EventPlanner/)
 
     Search any major city for a Ticketmaster event, such as Sporting events, Music concerts and more. You can filter your search by genre and date range. 
     
